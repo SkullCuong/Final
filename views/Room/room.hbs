@@ -1,0 +1,23 @@
+<table>
+  <style>
+    table, th, td { border:1px solid black; }
+  </style>
+  <tr>
+    <th>Name</th>
+    <th>Image</th>
+    <th>Price</th>
+    <th>Status</th>
+    <th>Capacity</th>
+    <th>Hidden</th>
+  </tr>
+  {{#each room}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{image_url}}</td>
+      <td>{{price}}</td>
+      <td>{{status}}</td>
+      <td>{{capacity}}</td>
+      <td>{{delete_status}}</td>
+    </tr>
+  {{/each}}
+</table>
