@@ -1,13 +1,16 @@
-<form method="post">
+<form method='post' enctype='multipart/form-data'>
   <label>name</label><br />
-  <input type="text" name="name" value="{{room.name}}" /><br />
+  <input type='text' name='name' value='{{room.name}}' /><br />
   <label>type</label><br />
-  <input type="text" name="type" value="{{room.type}}" /><br />
+  <input type='text' name='type' value='{{room.type}}' /><br />
   <label>floor</label><br />
-  <input type="text" name="floor" value="{{room.floor}}" /><br />
+  <input type='text' name='floor' value='{{room.floor}}' /><br />
   <label>price</label><br />
-  <input type="text" name="price" value="{{room.price}}" /><br />
+  <input type='text' name='price' value='{{room.price}}' /><br />
   <label>capacity</label><br />
-  <input type="text" name="capacity" value="{{room.capacity}}" /><br />
-  <input type="submit" value="Submit" />
+  <input type='text' name='capacity' value='{{room.capacity}}' /><br />
+  <label>Choose a profile picture:</label><br />
+  <input type='file' name='image' />
+  <input type='text' name='oldimage' value='{{room.image_url}}' /><br />
+  <input type='submit' value='Submit' />
 </form>

@@ -1,13 +1,16 @@
-<form method="post">
+<form method='post' enctype='multipart/form-data'>
   <label>name</label><br />
-  <input type="text" name="name" /><br />
+  <input type='text' name='name' /><br />
   <label>type</label><br />
-  <input type="text" name="type" /><br />
+  <input type='text' name='type' /><br />
   <label>floor</label><br />
-  <input type="text" name="floor" /><br />
+  <input type='text' name='floor' /><br />
   <label>price</label><br />
-  <input type="text" name="price" /><br />
+  <input type='text' name='price' /><br />
   <label>capacity</label><br />
-  <input type="text" name="capacity" /><br />
-  <input type="submit" value="Submit" />
+  <input type='text' name='capacity' /><br />
+  <label>Choose a profile picture:</label>
+  <input type='file' name='image' />
+  <br />
+  <input type='submit' value='Submit' />
 </form>
