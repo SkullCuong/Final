@@ -15,12 +15,17 @@ app.engine('hbs', hbs.engine({ defaultLayout: 'index', extname: '.hbs' }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/', route);
-db.sequelize.sync({ force: false }).then(() =>
+db.sequelize.sync({ force: false }).then(async () => {
+  await createRoles();
   app.listen(3000, () => {
     console.log('Website running on: http://localhost:3000');
-  })
-);
+  });
+});
 
+async function createRoles() {
+  await db.Role.findOrCreate({ where: { name: 'Admin' } });
+  await db.Role.findOrCreate({ where: { name: 'User' } });
+}
 app.get('/', (req, res) => {
   res.render('home/index');
 });

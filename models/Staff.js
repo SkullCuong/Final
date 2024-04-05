@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Staff = sequelize.define(
-    "Staff",
+    'Staff',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
       name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      idnumber: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -58,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // Declare relation
-  Staff.associate = (models) => {
+  Staff.associate = models => {
     Staff.belongsTo(models.Role, {
       foreignKey: {
         allowNull: false,
