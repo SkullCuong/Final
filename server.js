@@ -11,6 +11,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static(path.join(__dirname, 'views/assets/')));
 app.use('/images', express.static(path.join(__dirname, 'views/images/')));
+app.use('/js', express.static(path.join(__dirname, 'views/js/')));
 app.engine('hbs', hbs.engine({ defaultLayout: 'index', extname: '.hbs' }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
@@ -28,4 +29,9 @@ async function createRoles() {
 }
 app.get('/', (req, res) => {
   res.render('home/index');
+});
+
+// Admin Page
+app.get('/admin', (req, res) => {
+  res.render('home/admin', { layout: 'admin' });
 });
