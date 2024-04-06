@@ -35,3 +35,8 @@ app.get('/', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('home/admin', { layout: 'admin' });
 });
+
+// Profile Page
+app.get('/profile', (req, res) => {
+  res.render('home/profile', { layout: 'admin' });
+});
