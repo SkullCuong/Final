@@ -25,11 +25,11 @@ class Room {
   static async index(req, res) {
     const roomDb = await db.Room.findAll();
     const rooms = roomDb.map(room => room.get({ plain: true }));
-    res.render('Room/room', { room: rooms });
+    res.render('Room/room', { layout: 'admin', room: rooms });
   }
 
   static createRender(req, res) {
-    res.render('Room/CreateRoom');
+    res.render('Room/CreateRoom', { layout: 'admin' });
   }
 
   static async create(req, res) {
@@ -50,7 +50,7 @@ class Room {
       const roomDb = await db.Room.findByPk(id);
       if (roomDb) {
         const room = roomDb.get({ plain: true });
-        res.render('Room/UpdateRoom', { layout: 'index', room: room });
+        res.render('Room/UpdateRoom', { layout: 'admin', room: room });
       }
     } catch (err) {
       console.log(err);

@@ -7,11 +7,11 @@ class Room {
   static async index(req, res) {
     const roleDb = await db.Role.findAll();
     const roles = roleDb.map(role => role.get({ plain: true }));
-    res.render('Role/index', { role: roles });
+    res.render('Role/index', { layout: 'admin', role: roles });
   }
 
   static async createRender(req, res) {
-    res.render('Role/CreateRole');
+    res.render('Role/CreateRole', { layout: 'admin' });
   }
 
   static async create(req, res) {
@@ -30,7 +30,7 @@ class Room {
       const roleDb = await db.Role.findByPk(id);
       if (roleDb) {
         const role = roleDb.get({ plain: true });
-        res.render('Role/UpdateRole', { layout: 'index', role: role });
+        res.render('Role/UpdateRole', { layout: 'admin', role: role });
       }
     } catch (err) {
       console.log(err);
