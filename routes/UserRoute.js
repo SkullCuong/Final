@@ -1,0 +1,20 @@
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/User');
+const account = require('../middleware/account');
+// router.get('/', roomController.index);
+router.get('/register', account.verifyToken, userController.signUpRender);
+router.post('/register', userController.signUp);
+router.get('/recovery', userController.forgetRender);
+router.post('/recovery', userController.forget);
+router.get('/change', userController.changePassRender);
+router.post('/change', userController.changePass);
+router.get('/confirm', userController.confirm);
+router.get('/login', account.verifyToken, userController.signInRender);
+router.post('/login', userController.signIn);
+router.get('/logout', userController.signOut);
+
+// router.get('/update/:id', roomController.updateRender);
+// router.post('/update/:id', uploadImage, roomController.update);
+// router.get('/delete/:id', roomController.delete);
+module.exports = router;
