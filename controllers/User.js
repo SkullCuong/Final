@@ -121,7 +121,6 @@ class User {
   }
 
   static async signOut(req, res) {
-    console.log('312312');
     res.clearCookie('access_token');
     res.redirect('/user/login');
   }
@@ -175,6 +174,52 @@ class User {
         { where: { forget_Token: token } }
       );
       res.redirect('/user/login');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async profileRender(req, res) {
+    const { id } = req.body.user;
+    try {
+      const userDb = await db.User.findByPk(id);
+      const user = userDb.get({ plain: true });
+      res.render('User/profile', { user });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async passRender(req, res) {
+    const { id } = req.body.user;
+    res.render('user/changePass', { id });
+  }
+
+  static async passChange(req, res) {
+    const { id, password, newPassword } = req.body;
+    console.log(password);
+    try {
+      const user = await db.User.findByPk(id);
+      console.log(user.password);
+      const validPassword = await brypt.compare(password, user.password);
+      if (user && validPassword) {
+        const pass = await User.hashPassword(newPassword);
+        await db.User.update({ password: pass }, { where: { id: id } });
+      }
+      res.redirect('/user/logout');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async profileUpdate(req, res) {
+    const { id, name, email, phone, address, sex, dob } = req.body;
+    try {
+      await db.User.update(
+        { name, email, phone, address, sex, dob },
+        { where: { id: id } }
+      );
+      res.redirect('/user/profile');
     } catch (err) {
       console.log(err);
     }

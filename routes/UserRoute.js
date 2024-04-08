@@ -13,7 +13,11 @@ router.get('/confirm', userController.confirm);
 router.get('/login', account.verifyToken, userController.signInRender);
 router.post('/login', userController.signIn);
 router.get('/logout', userController.signOut);
+router.get('/profile', account.verifyToken, userController.profileRender);
+router.post('/profile', account.verifyToken, userController.profileUpdate);
 
+router.get('/password', account.verifyToken, userController.passRender);
+router.post('/password', account.verifyToken, userController.passChange);
 // router.get('/update/:id', roomController.updateRender);
 // router.post('/update/:id', uploadImage, roomController.update);
 // router.get('/delete/:id', roomController.delete);

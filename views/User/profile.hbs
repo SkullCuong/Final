@@ -1,21 +1,3 @@
-<!--<form method='post'>
-  <label>Name</label><br />
-  <input type='text' name='name' /><br />
-  <label>Email</label><br />
-  <input type='text' name='email' /><br />
-  <label>Password</label><br />
-  <input type='text' name='password' /><br />
-  <label>Phone Number</label><br />
-  <input type='text' name='phone' /><br />
-  <label>Confrim</label><br />
-  <input type='text' name='confrim' /><br />
-  <label>Sex</label><br />
-  <input type='text' name='sex' /><br />
-  <label>Dob</label><br />
-  <input type='date' name='dob' /><br />
-  <input type='submit' value='Submit' />
-</form>-->
-
 <div class='container'>
   <div class='row justify-content-center'>
     <div class='col-12 col-lg-6'>
@@ -23,9 +5,21 @@
         <div class='row'>
           <div class='card'>
             <div class='card-header' style='background-color: white;'>
-              <h3 class='mb-0 text-center'><strong>Login</strong></h3>
+              <h3 class='mb-0 text-center'><strong>Profile</strong></h3>
             </div>
             <div class='card-body'>
+
+              <!-- id -->
+              <div class='text-center mb-2'>
+                <input
+                  type='text'
+                  name='id'
+                  class='form-control'
+                  placeholder='User Name'
+                  value='{{user.id}}'
+                  hidden
+                />
+              </div>
               <!-- User Name -->
               <h5 class='card-title mb-2'>User Name</h5>
               <div class='text-center mb-2'>
@@ -34,6 +28,8 @@
                   name='name'
                   class='form-control'
                   placeholder='User Name'
+                  value='{{user.name}}'
+                  readonly
                 />
               </div>
               <!-- Email -->
@@ -44,16 +40,8 @@
                   name='email'
                   class='form-control'
                   placeholder='Email'
-                />
-              </div>
-              <!-- Password -->
-              <h5 class='card-title mb-2'>Password</h5>
-              <div class='text-center mb-2'>
-                <input
-                  type='password'
-                  name='password'
-                  class='form-control'
-                  placeholder='Password'
+                  value='{{user.email}}'
+                  readonly
                 />
               </div>
               <!-- Phone Number -->
@@ -64,16 +52,17 @@
                   name='phone'
                   class='form-control'
                   placeholder='Phone Number'
+                  value='{{user.phone}}'
                 />
               </div>
-              <!-- Phone Number -->
-              <h5 class='card-title mb-2'>Confrim</h5>
+              <h5 class='card-title mb-2'>Address</h5>
               <div class='text-center mb-2'>
                 <input
                   type='text'
-                  name='confrim'
+                  name='address'
                   class='form-control'
-                  placeholder='Confrim'
+                  placeholder='Address'
+                  value='{{user.address}}'
                 />
               </div>
               <!-- Sex -->
@@ -84,20 +73,23 @@
                   name='sex'
                   class='form-control'
                   placeholder='Sex'
+                  value='{{user.sex}}'
                 />
               </div>
               <!-- Dob -->
               <h5 class='card-title mb-2'>Date Of Birth</h5>
               <div class='text-center mb-2'>
                 <input
-                  type='date'
-                  name='dob'
+                  type='text'
+                  name='date'
                   class='form-control'
                   placeholder='Date Of Birth'
+                  value='{{user.dob}}'
+                  readonly
                 />
               </div>
               <div class='text-center'>
-                <input type='submit' value='Submit' class='btn btn-secondary' />
+                <input type='submit' value='Update' class='btn btn-secondary' />
               </div>
             </div>
           </div>
