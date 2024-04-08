@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const roomRoute = require('../routes/RoomRoute');
 const roleRoute = require('../routes/RoleRoute');
+const userRoute = require('../routes/UserRoute');
 router.use('/room', roomRoute);
 router.use('/role', roleRoute);
+router.use('/user', userRoute);
 module.exports = router;

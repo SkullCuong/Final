@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const hbs = require('express-handlebars');
 const route = require('./routes/indexRoute');
 const db = require('./models/index');
+const dotenv = require('dotenv');
+
+dotenv.config();
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static(path.join(__dirname, 'views/assets/')));

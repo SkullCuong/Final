@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Booking = sequelize.define(
-    "Booking",
+    'Booking',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   //Declare realation
-  Booking.associate = (models) => {
-    Booking.belongsTo(models.Guest, {
+  Booking.associate = models => {
+    Booking.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },

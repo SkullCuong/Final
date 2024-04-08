@@ -55,11 +55,12 @@
             <nav class='main-nav'>
               <!-- ***** Logo Start ***** -->
               <a href='index.html' class='logo'>
-                <img src='assets/images/logo.png' />
+                <img src='/assets/images/logo.png' />
               </a>
               <!-- ***** Logo End ***** -->
               <!-- ***** Menu Start ***** -->
               <ul class='nav'>
+                <div>Welcome, {{username}}</div>
                 <li class='scroll-to-section'><a
                     href='#top'
                     class='active'
@@ -209,7 +210,6 @@
 
     <!-- Global Init -->
     <script src='/assets/js/custom.js'></script>
-
     <script>
       $(function () { var selectedClass = ""; $("p").click(function () {
       selectedClass = $(this).attr("data-rel"); $("#portfolio").fadeTo(50, 0.1);

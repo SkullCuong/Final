@@ -31,8 +31,7 @@ const db = {
 
 db.Room = require('./Room.js')(sequelize, DataTypes);
 db.Role = require('./Role.js')(sequelize, DataTypes);
-db.Guest = require('./Guest.js')(sequelize, DataTypes);
-db.Staff = require('./Staff.js')(sequelize, DataTypes);
+db.User = require('./User.js')(sequelize, DataTypes);
 db.Booking = require('./Booking.js')(sequelize, DataTypes);
 db.Bookingdetail = require('./BookingDetail.js')(sequelize, DataTypes);
 Object.keys(db).forEach(modelName => {
