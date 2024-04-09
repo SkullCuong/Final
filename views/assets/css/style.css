@@ -1,0 +1,29 @@
+.profilebar-link,
+a.profilebar-link {
+  background: #ffffff;
+  border-left: 3px solid transparent;
+  color: #888888;
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 0.625rem 1.625rem;
+  position: relative;
+  text-decoration: none;
+  transition: background 0.1s ease-in-out;
+}
+
+.profilebar-link,
+a.profilebar-link:hover {
+  background: #000000;
+  border-left: 3px solid transparent;
+  color: #ffffff;
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 0.625rem 1.625rem;
+  position: relative;
+  text-decoration: none;
+  transition: background 0.1s ease-in-out;
+}

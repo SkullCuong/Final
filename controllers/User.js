@@ -184,7 +184,7 @@ class User {
     try {
       const userDb = await db.User.findByPk(id);
       const user = userDb.get({ plain: true });
-      res.render('User/profile', { user });
+      res.render('User/profile', { layout: 'profile', user });
     } catch (err) {
       console.log(err);
     }

@@ -1,100 +1,91 @@
-<div class='container'>
-  <div class='row justify-content-center'>
-    <div class='col-12 col-lg-6'>
-      <form method='post'>
-        <div class='row'>
-          <div class='card'>
-            <div class='card-header' style='background-color: white;'>
-              <h3 class='mb-0 text-center'><strong>Profile</strong></h3>
-            </div>
-            <div class='card-body'>
+<form method='post'>
+  <div class='row'>
+    <div class='card'>
+      <div class='card-body'>
 
-              <!-- id -->
-              <div class='text-center mb-2'>
-                <input
-                  type='text'
-                  name='id'
-                  class='form-control'
-                  placeholder='User Name'
-                  value='{{user.id}}'
-                  hidden
-                />
-              </div>
-              <!-- User Name -->
-              <h5 class='card-title mb-2'>User Name</h5>
-              <div class='text-center mb-2'>
-                <input
-                  type='text'
-                  name='name'
-                  class='form-control'
-                  placeholder='User Name'
-                  value='{{user.name}}'
-                  readonly
-                />
-              </div>
-              <!-- Email -->
-              <h5 class='card-title mb-2'>Email</h5>
-              <div class='text-center mb-2'>
-                <input
-                  type='text'
-                  name='email'
-                  class='form-control'
-                  placeholder='Email'
-                  value='{{user.email}}'
-                  readonly
-                />
-              </div>
-              <!-- Phone Number -->
-              <h5 class='card-title mb-2'>Phone Number</h5>
-              <div class='text-center mb-2'>
-                <input
-                  type='text'
-                  name='phone'
-                  class='form-control'
-                  placeholder='Phone Number'
-                  value='{{user.phone}}'
-                />
-              </div>
-              <h5 class='card-title mb-2'>Address</h5>
-              <div class='text-center mb-2'>
-                <input
-                  type='text'
-                  name='address'
-                  class='form-control'
-                  placeholder='Address'
-                  value='{{user.address}}'
-                />
-              </div>
-              <!-- Sex -->
-              <h5 class='card-title mb-2'>Sex</h5>
-              <div class='text-center mb-2'>
-                <input
-                  type='text'
-                  name='sex'
-                  class='form-control'
-                  placeholder='Sex'
-                  value='{{user.sex}}'
-                />
-              </div>
-              <!-- Dob -->
-              <h5 class='card-title mb-2'>Date Of Birth</h5>
-              <div class='text-center mb-2'>
-                <input
-                  type='text'
-                  name='date'
-                  class='form-control'
-                  placeholder='Date Of Birth'
-                  value='{{user.dob}}'
-                  readonly
-                />
-              </div>
-              <div class='text-center'>
-                <input type='submit' value='Update' class='btn btn-secondary' />
-              </div>
-            </div>
-          </div>
+        <!-- id -->
+        <div class='text-center mb-2'>
+          <input
+            type='text'
+            name='id'
+            class='form-control'
+            placeholder='User Name'
+            value='{{user.id}}'
+            hidden
+          />
         </div>
-      </form>
+        <!-- User Name -->
+        <h5 class='card-title mb-2'>User Name</h5>
+        <div class='text-center mb-2'>
+          <input
+            type='text'
+            name='name'
+            class='form-control'
+            placeholder='User Name'
+            value='{{user.name}}'
+            readonly
+          />
+        </div>
+        <!-- Email -->
+        <h5 class='card-title mb-2'>Email</h5>
+        <div class='text-center mb-2'>
+          <input
+            type='text'
+            name='email'
+            class='form-control'
+            placeholder='Email'
+            value='{{user.email}}'
+            readonly
+          />
+        </div>
+        <!-- Phone Number -->
+        <h5 class='card-title mb-2'>Phone Number</h5>
+        <div class='text-center mb-2'>
+          <input
+            type='text'
+            name='phone'
+            class='form-control'
+            placeholder='Phone Number'
+            value='{{user.phone}}'
+          />
+        </div>
+        <h5 class='card-title mb-2'>Address</h5>
+        <div class='text-center mb-2'>
+          <input
+            type='text'
+            name='address'
+            class='form-control'
+            placeholder='Address'
+            value='{{user.address}}'
+          />
+        </div>
+        <!-- Sex -->
+        <h5 class='card-title mb-2'>Sex</h5>
+        <div class='text-center mb-2'>
+          <input
+            type='text'
+            name='sex'
+            class='form-control'
+            placeholder='Sex'
+            value='{{user.sex}}'
+          />
+        </div>
+        <!-- Dob -->
+        <h5 class='card-title mb-2'>Date Of Birth</h5>
+        <div class='text-center mb-2'>
+          <input
+            type='text'
+            name='date'
+            class='form-control'
+            placeholder='Date Of Birth'
+            value='{{user.dob}}'
+            readonly
+          />
+        </div>
+        <div class='text-center'>
+          <input type='submit' value='Update' class='btn btn-secondary' />
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</form>

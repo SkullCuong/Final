@@ -41,5 +41,5 @@ app.get('/admin', (req, res) => {
 
 // Profile Page
 app.get('/profile', (req, res) => {
-  res.render('home/profile', { layout: 'admin' });
+  res.render('home/profile', { layout: 'index' });
 });
