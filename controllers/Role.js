@@ -1,6 +1,6 @@
 'use strict';
 const db = require('../models/index');
-class Room {
+class Role {
   constructor(name) {
     this.name = name;
   }
@@ -48,4 +48,4 @@ class Room {
   }
 }
 
-module.exports = Room;
+module.exports = Role;
