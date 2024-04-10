@@ -18,7 +18,4 @@ router.post('/profile', account.verifyToken, userController.profileUpdate);
 
 router.get('/password', account.verifyToken, userController.passRender);
 router.post('/password', account.verifyToken, userController.passChange);
-// router.get('/update/:id', roomController.updateRender);
-// router.post('/update/:id', uploadImage, roomController.update);
-// router.get('/delete/:id', roomController.delete);
 module.exports = router;
