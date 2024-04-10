@@ -162,7 +162,7 @@ class User {
 
   static async changePassRender(req, res) {
     const { token } = req.query;
-    res.render('User/forgetFrom', { token: token });
+    res.render('User/forgetFrom', { layout: 'profile', token: token });
   }
 
   static async changePass(req, res) {
