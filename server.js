@@ -33,12 +33,10 @@ async function createRoles() {
 app.get('/', (req, res) => {
   res.render('home/index');
 });
-
 // Admin Page
 app.get('/admin', (req, res) => {
-  res.render('home/admin', { layout: 'admin' });
+  res.render('admin/index', { layout: 'admin' });
 });
-
 // Profile Page
 app.get('/profile', (req, res) => {
   res.render('home/profile', { layout: 'index' });
