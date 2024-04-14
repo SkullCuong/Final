@@ -27,3 +27,20 @@ a.profilebar-link:hover {
   text-decoration: none;
   transition: background 0.1s ease-in-out;
 }
+.Add_btn {
+  height: 50px;
+  text-align: center;
+  background: black;
+  color: #ffffff;
+  display: flex;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.Add_btn i {
+  margin: 0 5px;
+}
+.Add_btn:hover {
+  text-decoration: none;
+  color: #69e0ff;
+}
