@@ -1,13 +1,19 @@
 'use strict';
 const db = require('../models/index');
+const page = require('../middleware/page');
 class Role {
   constructor(name) {
     this.name = name;
   }
   static async index(req, res) {
-    const roleDb = await db.Role.findAll();
-    const roles = roleDb.map(role => role.get({ plain: true }));
-    res.render('Role/index', { layout: 'admin', role: roles });
+    const currentPage = req.query.page || 1;
+    const { objects, pagesArray } = await page(currentPage, db.Role);
+    res.render('Role/index', {
+      layout: 'admin',
+      role: objects,
+      pagesArray,
+      currentPage,
+    });
   }
 
   static async createRender(req, res) {
@@ -16,9 +22,9 @@ class Role {
 
   static async create(req, res) {
     const { name } = req.body;
-    const room = new Room(name);
+    const role = new Role(name);
     try {
-      await db.Role.create(room);
+      await db.Role.create(role);
       res.redirect('/role');
     } catch (err) {
       console.log(err);

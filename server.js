@@ -8,7 +8,8 @@ const hbs = require('express-handlebars');
 const route = require('./routes/indexRoute');
 const db = require('./models/index');
 const dotenv = require('dotenv');
-
+const Handlebars = require('handlebars');
+app.use(express.json());
 dotenv.config();
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
@@ -30,8 +31,15 @@ async function createRoles() {
   await db.Role.findOrCreate({ where: { name: 'Admin' } });
   await db.Role.findOrCreate({ where: { name: 'User' } });
 }
+Handlebars.registerHelper('isCurrentPage', function (currentPage, pageNumber) {
+  return currentPage == pageNumber;
+});
+
 app.get('/', (req, res) => {
   res.render('home/index');
+});
+app.post('/123', (req, res) => {
+  console.log(req.body);
 });
 // Admin Page
 app.get('/admin', (req, res) => {

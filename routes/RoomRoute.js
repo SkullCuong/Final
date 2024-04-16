@@ -11,4 +11,8 @@ router.post('/create', uploadImage, roomController.create);
 router.get('/update/:id', roomController.updateRender);
 router.post('/update/:id', uploadImage, roomController.update);
 router.get('/delete/:id', roomController.delete);
+
+// API
+
+router.post('/checkexist', roomController.checkExist);
 module.exports = router;
