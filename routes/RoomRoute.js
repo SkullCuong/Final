@@ -5,7 +5,7 @@ const roomController = require('../controllers/Room');
 
 router.get('/', roomController.room);
 router.get('/roomindex', roomController.index);
-router.get('/detail', roomController.detail);
+router.get('/detail/:id', roomController.detail);
 router.get('/create', roomController.createRender);
 router.post('/create', uploadImage, roomController.create);
 router.get('/update/:id', roomController.updateRender);

@@ -32,10 +32,18 @@ class Room {
     const rooms = roomDb.map(room => room.get({ plain: true }));
     res.render('Room/room', { room: rooms });
   }
+
   static async detail(req, res) {
-    const roomDb = await db.Room.findAll();
-    const rooms = roomDb.map(room => room.get({ plain: true }));
-    res.render('Room/DetailRoom', { room: rooms });
+    const id = req.params.id;
+    try {
+      const roomDb = await db.Room.findByPk(id);
+      if (roomDb) {
+        const room = roomDb.get({ plain: true });
+        res.render('Room/DetailRoom', { room: room });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   static createRender(req, res) {
