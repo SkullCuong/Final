@@ -1,0 +1,51 @@
+<div class='row'>
+  <div class='col-2'>
+    <div
+      class='card'
+      style='border-radius: 30px; width:150px; margin-bottom: 20px;'
+    >
+      <a class='Add_btn' href=''><i class='fa-solid fa-add'></i> Add More</a>
+    </div>
+  </div>
+</div>
+
+<table class='table'>
+  <thead class='thead-dark'>
+    <tr style='text-align:center;'>
+      <th scope='col'>Id</th>
+      <th scope='col'>Name</th>
+      <th scope='col'>Type</th>
+      <th scope='col'>Image</th>
+      <th scope='col'>Status</th>
+      <th scope='col'>Detail</th>
+      <th scope='col'>Update</th>
+      <th scope='col'>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each room}}
+      <tr style='text-align:center;'>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
+        <td>{{type}}</td>
+        <td><img src='/images/{{image_url}}' width='100' height='100' /></td>
+        <td>{{status}}</td>
+        <td>
+          <a href='' style='color: black;'><i
+              class='fa-solid fa-magnifying-glass'
+            ></i></a>
+          <td>
+            <a href='' style='color: black;'><i
+                class='fa-solid fa-pen-to-square'
+              ></i></a>
+          </td>
+          <td>
+            <a href='' style='color: black;'><i
+                class='fa-solid fa-trash'
+              ></i></a>
+          </td>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

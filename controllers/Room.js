@@ -25,7 +25,17 @@ class Room {
   static async index(req, res) {
     const roomDb = await db.Room.findAll();
     const rooms = roomDb.map(room => room.get({ plain: true }));
-    res.render('Room/room', { layout: 'admin', room: rooms });
+    res.render('Room/index', { layout: 'admin', room: rooms });
+  }
+  static async room(req, res) {
+    const roomDb = await db.Room.findAll();
+    const rooms = roomDb.map(room => room.get({ plain: true }));
+    res.render('Room/room', { room: rooms });
+  }
+  static async detail(req, res) {
+    const roomDb = await db.Room.findAll();
+    const rooms = roomDb.map(room => room.get({ plain: true }));
+    res.render('Room/DetailRoom', { room: rooms });
   }
 
   static createRender(req, res) {

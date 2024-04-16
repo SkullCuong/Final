@@ -1,51 +1,73 @@
-<div class='row'>
-  <div class='col-2'>
-    <div
-      class='card'
-      style='border-radius: 30px; width:150px; margin-bottom: 20px;'
-    >
-      <a class='Add_btn' href=''><i class='fa-solid fa-add'></i> Add More</a>
+<!-- ***** Products Area Starts ***** -->
+<section class='section' id='products'>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-lg-12'>
+        <div class='section-heading'>
+          <h2>Our Latest Products</h2>
+          <span>Check out all of our products.</span>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-<table class='table'>
-  <thead class='thead-dark'>
-    <tr style='text-align:center;'>
-      <th scope='col'>Id</th>
-      <th scope='col'>Name</th>
-      <th scope='col'>Type</th>
-      <th scope='col'>Image</th>
-      <th scope='col'>Status</th>
-      <th scope='col'>Detail</th>
-      <th scope='col'>Update</th>
-      <th scope='col'>Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each room}}
-      <tr style='text-align:center;'>
-        <td>{{id}}</td>
-        <td>{{name}}</td>
-        <td>{{type}}</td>
-        <td><img src='/images/{{image_url}}' width='100' height='100' /></td>
-        <td>{{status}}</td>
-        <td>
-          <a href='' style='color: black;'><i
-              class='fa-solid fa-magnifying-glass'
-            ></i></a>
-          <td>
-            <a href='' style='color: black;'><i
-                class='fa-solid fa-pen-to-square'
-              ></i></a>
-          </td>
-          <td>
-            <a href='' style='color: black;'><i
-                class='fa-solid fa-trash'
-              ></i></a>
-          </td>
-        </td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <div class='container'>
+    <div class='row'>
+      {{#each room}}
+        <div class='col-lg-4'>
+          <div class='item'>
+            <div class='thumb'>
+              <div class='hover-content'>
+                <ul>
+                  <li><a href='single-product.html'><i
+                        class='fa fa-eye'
+                      ></i></a></li>
+                  <li><a href='single-product.html'><i
+                        class='fa fa-star'
+                      ></i></a></li>
+                  <li><a href='single-product.html'><i
+                        class='fa fa-shopping-cart'
+                      ></i></a></li>
+                </ul>
+              </div>
+              <img src='../assets/images/men-01.jpg' alt='' />
+            </div>
+            <div class='down-content'>
+              <h4>{{name}}</h4>
+              <span>${{type}}</span>
+              <span>Capacity: {{type}}</span>
+              <ul class='stars'>
+                <li><i class='fa fa-star'></i></li>
+                <li><i class='fa fa-star'></i></li>
+                <li><i class='fa fa-star'></i></li>
+                <li><i class='fa fa-star'></i></li>
+                <li><i class='fa fa-star'></i></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+      <div class='col-lg-12'>
+        <div class='pagination'>
+          <ul>
+            <li>
+              <a href='#'>1</a>
+            </li>
+            <li class='active'>
+              <a href='#'>2</a>
+            </li>
+            <li>
+              <a href='#'>3</a>
+            </li>
+            <li>
+              <a href='#'>4</a>
+            </li>
+            <li>
+              <a href='#'>></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ***** Products Area Ends ***** -->
