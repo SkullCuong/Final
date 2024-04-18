@@ -4,9 +4,8 @@ const brypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const sendMail = require('./sendMail');
 const { v4: uuidv4 } = require('uuid');
-const { use } = require('../routes/UserRoute');
+const { Pagination, userPage } = require('../middleware/page');
 const { where } = require('sequelize');
-
 class User {
   constructor(
     name,
@@ -223,6 +222,38 @@ class User {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  static async index(req, res) {
+    const currentPage = req.query.page || 1;
+    const { objects, pagesArray } = await userPage(currentPage, db);
+    res.render('User/index', {
+      layout: 'admin',
+      role: objects,
+      pagesArray,
+      currentPage,
+    });
+  }
+
+  static async renderStatus(req, res) {
+    const isActive = req.query.status === 'true';
+    res.render('User/status', {
+      layout: 'admin',
+      isActive: isActive,
+    });
+  }
+
+  static async status(req, res) {
+    const id = req.params.id;
+    const { isActive } = req.body;
+
+    console.log(id, isActive);
+    try {
+      await db.User.update({ isActive: isActive }, { where: { id: id } });
+    } catch (err) {
+      console.log(err);
+    }
+    res.redirect('/User');
   }
 
   static generate_Token() {

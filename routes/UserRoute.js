@@ -16,6 +16,10 @@ router.get('/logout', userController.signOut);
 router.get('/profile', account.verifyToken, userController.profileRender);
 router.post('/profile', account.verifyToken, userController.profileUpdate);
 
+router.get('/', userController.index);
 router.get('/password', account.verifyToken, userController.passRender);
 router.post('/password', account.verifyToken, userController.passChange);
+
+router.get('/status/:id', account.verifyToken, userController.renderStatus);
+router.post('/status/:id', account.verifyToken, userController.status);
 module.exports = router;

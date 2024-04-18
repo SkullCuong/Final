@@ -8,4 +8,6 @@ router.post('/create', roleController.create);
 router.get('/update/:id', roleController.updateRender);
 router.post('/update/:id', roleController.update);
 // router.get('/delete/:id', roomController.delete);
+
+router.post('/checkexist', roleController.checkExist);
 module.exports = router;

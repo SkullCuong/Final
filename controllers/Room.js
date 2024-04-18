@@ -2,7 +2,7 @@
 const db = require('../models/index');
 const fs = require('fs').promises;
 const path = require('path');
-const page = require('../middleware/page');
+const { Pagination, userPage } = require('../middleware/page');
 class Room {
   constructor(
     name,
@@ -25,7 +25,7 @@ class Room {
   }
   static async index(req, res) {
     const currentPage = req.query.page || 1;
-    const { objects, pagesArray } = await page(currentPage, db.Room);
+    const { objects, pagesArray } = await Pagination(currentPage, db.Room);
     res.render('Room/index', {
       layout: 'admin',
       room: objects,

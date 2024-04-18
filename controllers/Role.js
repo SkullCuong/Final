@@ -1,13 +1,14 @@
 'use strict';
 const db = require('../models/index');
 const page = require('../middleware/page');
+const { Pagination, userPage } = require('../middleware/page');
 class Role {
   constructor(name) {
     this.name = name;
   }
   static async index(req, res) {
     const currentPage = req.query.page || 1;
-    const { objects, pagesArray } = await page(currentPage, db.Role);
+    const { objects, pagesArray } = await Pagination(currentPage, db.Role);
     res.render('Role/index', {
       layout: 'admin',
       role: objects,
@@ -50,6 +51,15 @@ class Role {
       res.redirect('/role');
     } catch (err) {
       console.log(err);
+    }
+  }
+  static async checkExist(req, res) {
+    const { name } = req.body;
+    const Role = await db.Role.findOne({ where: { name: name } });
+    if (Role) {
+      res.json({ exist: true });
+    } else {
+      res.json({ exist: false });
     }
   }
 }

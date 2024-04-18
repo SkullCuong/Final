@@ -1,13 +1,15 @@
 <div class='container'>
   <div class='row justify-content-center'>
     <div class='col-12 col-lg-6'>
-      <form method='post' enctype='multipart/form-data'>
+      <form id='roomUpdate' method='post' enctype='multipart/form-data'>
         <div class='row'>
           <div class='card'>
             <div class='card-header'>
               <h2 class='mb-0 text-center'><strong>Room</strong></h2>
             </div>
             <div class='card-body'>
+              <div id='error-message' style='color: red; display: none;'>Please
+                fill out all fields before submitting the form.</div>
               <!-- Room Name -->
               <h5 class='card-title mb-2'>Room Name</h5>
               <div class='text-center mb-3'>
@@ -89,3 +91,7 @@
     </div>
   </div>
 </div>
+<script
+  src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'
+></script>
+<script src='/assets/js/room/update.js'></script>

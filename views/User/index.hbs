@@ -1,19 +1,22 @@
-<div class='row'>
+{{!-- <div class='row'>
   <div class='col-2'>
     <div
       class='card'
       style='border-radius: 30px; width:150px; margin-bottom: 20px;'
     >
-      <a class='Add_btn' href='role/create'><i class='fa-solid fa-add'></i> Add More</a>
+      <a class='Add_btn' href=''><i class='fa-solid fa-add'></i> Add More</a>
     </div>
   </div>
-</div>
+</div> --}}
 
 <table class='table'>
   <thead class='thead-dark'>
     <tr style='text-align:center;'>
       <th scope='col'>Id</th>
       <th scope='col'>Name</th>
+      <th scope='col'>Email</th>
+      <th scope='col'>Role</th>
+      <th scope='col'>Status</th>
       <th scope='col'>Update</th>
     </tr>
   </thead>
@@ -22,10 +25,14 @@
       <tr style='text-align:center;'>
         <td>{{id}}</td>
         <td>{{name}}</td>
+        <td>{{email}}</td>
+        <td>{{Role.name}}</td>
+        <td>{{#if isActive}}Active{{else}}Not Active{{/if}}</td>
         <td>
-            <a href='role/update/{{id}}' style='color: black;'><i
+            <a href='/User/status/{{id}}?status={{isActive}}' style='color: black;'><i
                 class='fa-solid fa-pen-to-square'
               ></i></a>
+          </td>
         </td>
       </tr>
     {{/each}}
@@ -35,7 +42,7 @@
   <ul class="pagination">
     {{#each pagesArray}}
       <li {{#if (isCurrentPage ../currentPage this)}} class="active"{{/if}}>
-        <a href='/role/?page={{this}}'>{{this}}</a>
+        <a href='/user/?page={{this}}'>{{this}}</a>
       </li>
     {{/each}}
   </ul>

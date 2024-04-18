@@ -2,26 +2,15 @@ async function checkEmptyFields(e) {
   e.preventDefault();
   // Get references to input elements
   const nameInput = document.querySelector('input[name="name"]');
-  const typeInput = document.querySelector('input[name="type"]');
-  const floorInput = document.querySelector('input[name="floor"]');
-  const priceInput = document.querySelector('input[name="price"]');
-  const capacityInput = document.querySelector('input[name="capacity"]');
-  const imageInput = document.querySelector('input[name="image"]');
-  if (
-    nameInput.value === '' ||
-    typeInput.value === '' ||
-    floorInput.value === '' ||
-    priceInput.value === '' ||
-    capacityInput.value === '' ||
-    imageInput.value === ''
-  ) {
+
+  if (nameInput.value === '' || '') {
     document.getElementById('error-message').style.display = 'block';
     return false;
   }
   try {
     const response = await axios
       .post(
-        'http://localhost:3000/room/checkexist',
+        'http://localhost:3000/role/checkexist',
         { name: nameInput.value },
         { headers: { 'Content-Type': 'application/json' } }
       )
@@ -29,7 +18,7 @@ async function checkEmptyFields(e) {
         return response.data.exist;
       });
     if (response) {
-      document.getElementById('error-message').innerText = 'Room exists! ';
+      document.getElementById('error-message').innerText = 'Role exists! ';
       document.getElementById('error-message').style.display = 'block';
     } else {
       document.getElementById('roomForm').submit();
@@ -38,7 +27,6 @@ async function checkEmptyFields(e) {
     window.location.href = 'http://localhost:3000/room/create';
   }
 }
-
 document
-  .getElementById('roomForm')
+  .getElementById('roleCreate')
   .addEventListener('submit', checkEmptyFields);
