@@ -31,6 +31,29 @@
     {{/each}}
   </tbody>
 </table>
+<nav aria-label="Pagenavigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    {{#each pagesArray}}
+      <li {{#if (isCurrentPage ../currentPage this)}} class="page-item"{{/if}}>
+        <a class="page-link"href='/role/?page={{this}}'>{{this}}</a>
+      </li>
+    {{/each}}
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!--
 <div class='row'>
   <ul class="pagination">
     {{#each pagesArray}}
@@ -39,4 +62,4 @@
       </li>
     {{/each}}
   </ul>
-</div>
+</div>-->

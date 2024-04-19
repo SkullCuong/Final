@@ -30,7 +30,7 @@ a.profilebar-link:hover {
 .Add_btn {
   height: 50px;
   text-align: center;
-  background: black;
+  background: #212529;
   color: #ffffff;
   display: flex;
   border-radius: 30px;

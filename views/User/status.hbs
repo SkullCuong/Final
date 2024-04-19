@@ -18,14 +18,22 @@
                 />
               </div>
               {{#if isActive}}
-                <select name='isActive'>
+                <select
+                  name='isActive'
+                  class='form-select'
+                  aria-label='Default select example'
+                >
                   <option value='true'>Active</option>
                   <option value='false'>Not Active</option>
                 </select>
               {{else}}
-                <select name='isActive'>
-                  <option value='false'>Not Active</option>
+                <select
+                  name='isActive'
+                  class='form-select mb-3'
+                  aria-label='Default select example'
+                >
                   <option value='true'>Active</option>
+                  <option value='false'>Not Active</option>
                 </select>
               {{/if}}
               <div class='text-center'>
