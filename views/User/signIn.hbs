@@ -1,18 +1,9 @@
-<!--<form method='post'>
-   <label>Wellcome {{user.username}}</label><br /> 
-  <label>Email</label><br />
-  <input type='text' name='email' /><br />
-  <label>Password</label><br />
-  <input type='text' name='password' /><br />
-  <input type='submit' value='Submit' />
-</form>
-<a href='/user/logout' class='logout-btn'>Logout</a>-->
 <div class='main-banner' id='top' style='padding-bottom: 60px;'>
   <div class='container-fluid'>
     <div class='container'>
       <div class='row justify-content-center'>
         <div class='col-12 col-lg-6'>
-          <form method='post'>
+          <form id='login' method='post'>
             <div class='row'>
               <div class='card'>
                 <div class='card-header' style='background-color: white;'>
@@ -37,6 +28,10 @@
                       placeholder='Password'
                     />
                   </div>
+                  <div
+                    id='error-message'
+                    style='color: red; display: none;'
+                  >Please fill out all fields before submitting the form.</div>
                   <div class='text-center'>
                     <input
                       type='submit'
@@ -53,3 +48,4 @@
     </div>
   </div>
 </div>
+<script src='/assets/js/account/login.js'></script>

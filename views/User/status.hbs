@@ -8,19 +8,21 @@
               <h2 class='mb-0 text-center'><strong>Account</strong></h2>
             </div>
             <div class='card-body'>
+              <h5 class='card-title mb-2'>Role</h5>
+              <select
+                name='RoleId'
+                class='form-select mb-3'
+                aria-label='Default select example'
+              >
+                {{#each roles}}
+                  <option value='{{id}}'>{{name}}</option>
+                {{/each}}
+              </select>
               <h5 class='card-title mb-2'>Status</h5>
-              <div class='text-center mb-3'>
-                <input
-                  type='text'
-                  name=''
-                  class='form-control'
-                  placeholder='Role Name'
-                />
-              </div>
               {{#if isActive}}
                 <select
                   name='isActive'
-                  class='form-select'
+                  class='form-select mb-3'
                   aria-label='Default select example'
                 >
                   <option value='true'>Active</option>
@@ -32,8 +34,8 @@
                   class='form-select mb-3'
                   aria-label='Default select example'
                 >
-                  <option value='true'>Active</option>
                   <option value='false'>Not Active</option>
+                  <option value='true'>Active</option>
                 </select>
               {{/if}}
               <div class='text-center'>

@@ -237,23 +237,42 @@ class User {
 
   static async renderStatus(req, res) {
     const isActive = req.query.status === 'true';
-    res.render('User/status', {
-      layout: 'admin',
-      isActive: isActive,
-    });
+    try {
+      const roleDb = await db.Role.findAll({ order: [['id', 'DESC']] });
+      const roles = roleDb.map(role => role.get({ plain: true }));
+      res.render('User/status', {
+        layout: 'admin',
+        isActive: isActive,
+        roles: roles,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   static async status(req, res) {
     const id = req.params.id;
-    const { isActive } = req.body;
-
-    console.log(id, isActive);
+    const { isActive, RoleId } = req.body;
     try {
-      await db.User.update({ isActive: isActive }, { where: { id: id } });
+      await db.User.update(
+        { isActive: isActive, RoleId: RoleId },
+        { where: { id: id } }
+      );
     } catch (err) {
       console.log(err);
     }
     res.redirect('/User');
+  }
+
+  static async checkExist(req, res) {
+    const { email } = req.body;
+    console.log(email);
+    const User = await db.User.findOne({ where: { email: email } });
+    if (User) {
+      res.json({ exist: true });
+    } else {
+      res.json({ exist: false });
+    }
   }
 
   static generate_Token() {

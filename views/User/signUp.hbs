@@ -20,7 +20,7 @@
     <div class='container'>
       <div class='row justify-content-center'>
         <div class='col-12 col-lg-6'>
-          <form method='post'>
+          <form id="signUp" method='post'>
             <div class='row'>
               <div class='card'>
                 <div class='card-header' style='background-color: white;'>
@@ -80,7 +80,6 @@
                   <!-- Sex -->
                   <h5 class='card-title mb-2'>Gender</h5>
                   <select class='form-select mb-3' name='sex' id='sex'>
-                    <option value='' selected>Open this select menu</option>
                     <option value='true'>Male</option>
                     <option value='false'>Female</option>
                   </select>
@@ -94,6 +93,11 @@
                       placeholder='Date Of Birth'
                     />
                   </div>
+                  <div
+                    id='error-message'
+                    style='color: red; display: none;'
+                  >Please fill out all fields before submitting the form.</div>
+                  <div class='text-center'>
                   <div class='text-center'>
                     <input
                       type='submit'
@@ -110,3 +114,7 @@
     </div>
   </div>
 </div>
+<script
+  src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'
+></script>
+<script src='/assets/js/account/register.js'></script>

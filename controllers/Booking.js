@@ -2,6 +2,7 @@
 const { where } = require('sequelize');
 const db = require('../models/index');
 const BookingDetail = require('./BookingDetail');
+const { bookPage } = require('../middleware/page');
 class Booking {
   constructor(date, Userid) {
     this.date = date;
@@ -60,6 +61,18 @@ class Booking {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  static async indexAdmin(req, res) {
+    const currentPage = req.query.page || 1;
+    const { objects, pagesArray } = await bookPage(currentPage, db);
+    console.log(pagesArray);
+    res.render('Booking/indexAdmin', {
+      layout: 'admin',
+      book: objects,
+      pagesArray,
+      currentPage,
+    });
   }
 
   static async date() {

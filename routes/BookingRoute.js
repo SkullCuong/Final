@@ -7,4 +7,7 @@ router.post('/book', account.verifyToken, bookingController.book);
 
 router.get('/checkin/:id', bookingController.checkInRender);
 router.post('/checkin/:id', bookingController.checkIn);
+
+router.get('/index', bookingController.indexAdmin);
+
 module.exports = router;

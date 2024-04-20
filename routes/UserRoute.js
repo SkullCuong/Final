@@ -22,4 +22,6 @@ router.post('/password', account.verifyToken, userController.passChange);
 
 router.get('/status/:id', account.verifyToken, userController.renderStatus);
 router.post('/status/:id', account.verifyToken, userController.status);
+
+router.post('/checkexist', userController.checkExist);
 module.exports = router;

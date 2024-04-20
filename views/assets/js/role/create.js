@@ -3,7 +3,7 @@ async function checkEmptyFields(e) {
   // Get references to input elements
   const nameInput = document.querySelector('input[name="name"]');
 
-  if (nameInput.value === '' || '') {
+  if (nameInput.value === '') {
     document.getElementById('error-message').style.display = 'block';
     return false;
   }
