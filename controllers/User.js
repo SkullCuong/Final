@@ -191,7 +191,7 @@ class User {
 
   static async passRender(req, res) {
     const { id } = req.body.user;
-    res.render('user/changePass', { id });
+    res.render('user/changePass', { layout: 'profile', id });
   }
 
   static async passChange(req, res) {
