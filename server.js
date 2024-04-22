@@ -9,6 +9,8 @@ const route = require('./routes/indexRoute');
 const db = require('./models/index');
 const dotenv = require('dotenv');
 const Handlebars = require('handlebars');
+
+const username = require('./middleware/username');
 app.use(express.json());
 dotenv.config();
 app.use(cookieParser());
@@ -35,7 +37,8 @@ Handlebars.registerHelper('isCurrentPage', function (currentPage, pageNumber) {
   return currentPage == pageNumber;
 });
 
-app.get('/', (req, res) => {
+app.get('/', username.name, (req, res) => {
+  console.log(res.locals.username);
   res.render('home/index');
 });
 app.post('/123', (req, res) => {

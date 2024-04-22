@@ -90,7 +90,6 @@ class User {
 
   static async signInRender(req, res) {
     const { user } = req.body;
-    console.log(user);
     res.render('User/signIn', { user: user });
   }
 
@@ -110,7 +109,7 @@ class User {
           sameSite: 'strict',
         });
 
-        res.render('home/index');
+        res.redirect('/');
       } else {
         console.log('Not valid');
       }

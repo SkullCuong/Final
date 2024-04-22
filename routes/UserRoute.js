@@ -10,7 +10,7 @@ router.post('/recovery', userController.forget);
 router.get('/change', userController.changePassRender);
 router.post('/change', userController.changePass);
 router.get('/confirm', userController.confirm);
-router.get('/login', account.verifyToken, userController.signInRender);
+router.get('/login', userController.signInRender);
 router.post('/login', userController.signIn);
 router.get('/logout', userController.signOut);
 router.get('/profile', account.verifyToken, userController.profileRender);
