@@ -86,12 +86,13 @@
                   </ul>
                 </li>
                 {{#if username}}
-                <li class='scroll-to-section'>Welcome {{username}}</a></li>
+                  <li class='scroll-to-section'><a
+                      href='/user/profile'
+                    >{{username}}</a></li>
                 {{else}}
-                <li class='scroll-to-section'><a href='/user/login'>Sign in</a></li>
-                <li class='scroll-to-section'><a href='/user/register'>Sign up</a></li>
+                  <li><a href='/user/login'>Sign in</a></li>
+                  <li><a href='/user/register'>Sign up</a></li>
                 {{/if}}
-
               </ul>
               <a class='menu-trigger'>
                 <span>Menu</span>
