@@ -20,7 +20,6 @@ class Booking {
     const { id, checkIn, checkout, roomId } = req.body;
     const date = await Booking.date();
     const book = new Booking(date, id);
-    console.log(book);
     try {
       const [booking, created] = await db.Booking.findOrCreate({
         where: { date: book.date, UserId: book.UserId },
