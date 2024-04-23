@@ -52,6 +52,20 @@ class Room {
     }
   }
 
+  // For User
+  static async roomdetail(req, res) {
+    const id = req.params.id;
+    try {
+      const roomDb = await db.Room.findByPk(id);
+      if (roomDb) {
+        const room = roomDb.get({ plain: true });
+        res.render('Room/roomDetail', { room: room });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   static createRender(req, res) {
     res.render('Room/CreateRoom', { layout: 'admin' });
   }

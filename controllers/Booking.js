@@ -11,7 +11,9 @@ class Booking {
 
   static async bookRender(req, res) {
     const { id } = req.body.user;
-    res.render('Booking/book', { id });
+    const roomId = req.params.id;
+    console.log(roomId);
+    res.render('Booking/book', { id, roomId });
   }
 
   static async book(req, res) {
