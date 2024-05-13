@@ -7,6 +7,7 @@ router.get('/', roomController.room);
 router.get('/roomindex', roomController.index);
 router.get('/detail/:id', roomController.detail);
 router.get('/roomDetail/:id', roomController.roomdetail);
+router.get('/adminroomDetail/:id', roomController.adminroomdetail);
 router.get('/create', roomController.createRender);
 router.post('/create', uploadImage, roomController.create);
 router.get('/update/:id', roomController.updateRender);
