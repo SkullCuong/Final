@@ -16,7 +16,7 @@ class User {
     dob,
     active_token,
     address = 'none',
-    image_url = 'none',
+    image_url = 'default.jpg',
     isActive = 0,
     RoleId = 2
   ) {
@@ -93,6 +93,24 @@ class User {
     res.render('User/signIn', { user: user });
   }
 
+  // // Api For Login
+  static async isValid(req, res) {
+    const { email, password } = req.body;
+    console.log(email, password);
+    try {
+      const user = await db.User.findOne({
+        where: { email: email },
+      });
+      const validPassword = await brypt.compare(password, user.password);
+      if (user && validPassword) {
+        res.json({ valid: true });
+      } else {
+        res.json({ valid: false });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   static async signIn(req, res) {
     const { email, password } = req.body;
     try {
@@ -108,10 +126,7 @@ class User {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           sameSite: 'strict',
         });
-
         res.redirect('/');
-      } else {
-        console.log('Not valid');
       }
     } catch (err) {
       console.log(err);
@@ -190,7 +205,13 @@ class User {
 
   static async passRender(req, res) {
     const { id } = req.body.user;
-    res.render('user/changePass', { layout: 'profile', id });
+    try {
+      const userDb = await db.User.findByPk(id);
+      const user = userDb.get({ plain: true });
+      res.render('user/changePass', { layout: 'profile', user });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   static async passChange(req, res) {
@@ -298,6 +319,30 @@ class User {
     const salt = await brypt.genSalt(10);
     const hashed = await brypt.hash(password, salt);
     return hashed;
+  }
+
+  // // Upload Image
+
+  static async uploadImageRender(req, res) {
+    const { id } = req.body.user;
+    try {
+      const userDb = await db.User.findByPk(id);
+      const user = userDb.get({ plain: true });
+      res.render('user/uploadImage', { layout: 'profile', user });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  static async uploadImage(req, res) {
+    const { id } = req.body;
+
+    try {
+      const { filename } = req.file;
+      await db.User.update({ image_url: filename }, { where: { id: id } });
+      res.redirect('/user/profile');
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

@@ -2,7 +2,11 @@
 const db = require('../models/index');
 const fs = require('fs').promises;
 const path = require('path');
-const { Pagination, userPage } = require('../middleware/page');
+const {
+  Pagination,
+  PaginationRoom,
+  SearchRoom,
+} = require('../middleware/page');
 class Room {
   constructor(
     name,
@@ -34,9 +38,20 @@ class Room {
     });
   }
   static async room(req, res) {
-    const roomDb = await db.Room.findAll();
-    const rooms = roomDb.map(room => room.get({ plain: true }));
-    res.render('Room/room', { room: rooms });
+    const { search, order } = req.query;
+    const currentPage = req.query.page || 1;
+    let result;
+    if (!search) {
+      result = await PaginationRoom(currentPage, db.Room, order);
+    } else {
+      result = await SearchRoom(currentPage, db.Room, search);
+    }
+    const { objects, pagesArray } = result;
+    res.render('Room/room', {
+      room: objects,
+      pagesArray,
+      currentPage,
+    });
   }
 
   static async detail(req, res) {

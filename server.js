@@ -48,7 +48,3 @@ app.post('/123', (req, res) => {
 app.get('/admin', (req, res) => {
   res.render('admin/index', { layout: 'admin' });
 });
-// Profile Page
-app.get('/profile', (req, res) => {
-  res.render('home/profile', { layout: 'index' });
-});

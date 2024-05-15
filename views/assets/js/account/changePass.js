@@ -1,9 +1,21 @@
 async function checkEmptyFields(e) {
   e.preventDefault();
   // // Get references to input elements
-  const nameInput = document.querySelector('input[name="email"]');
   const passwordInput = document.querySelector('input[name="password"]');
-  if (nameInput.value === '' || passwordInput.value === '') {
+  const newPasswordInput = document.querySelector('input[name="newPassword"]');
+  const confirmPasswordInput = document.querySelector('input[name="confirm"]');
+  const nameInput = document.querySelector('input[name="email"]');
+  console.log(nameInput.value);
+  if (
+    newPasswordInput.value === '' ||
+    passwordInput.value === '' ||
+    confirmPasswordInput.value === ''
+  ) {
+    document.getElementById('error-message').style.display = 'block';
+    return false;
+  } else if (newPasswordInput.value !== confirmPasswordInput.value) {
+    document.getElementById('error-message').innerText =
+      'Password and Confirm must be same !!!';
     document.getElementById('error-message').style.display = 'block';
     return false;
   } else {
@@ -11,12 +23,11 @@ async function checkEmptyFields(e) {
     const isValidAccount = await isValid(nameInput.value, passwordInput.value);
     if (!isValidAccount) {
       document.getElementById('error-message').innerText =
-        'Account is not valid !!!';
+        'password is not valid !!!';
       document.getElementById('error-message').style.display = 'block';
       return false;
     } else {
-      // Uncomment the line below if you want to submit the form after validation
-      document.getElementById('login').submit();
+      document.getElementById('password').submit();
     }
   }
 }
@@ -32,4 +43,6 @@ async function isValid(email, password) {
     window.location.href = 'http://localhost:3000/room/create';
   }
 }
-document.getElementById('login').addEventListener('submit', checkEmptyFields);
+document
+  .getElementById('password')
+  .addEventListener('submit', checkEmptyFields);

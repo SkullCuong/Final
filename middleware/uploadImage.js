@@ -20,6 +20,7 @@ async function uploadImage(req, res, next) {
     if (err) {
       console.log(err);
     }
+    console.log(req.file.filename);
     next();
   });
 }

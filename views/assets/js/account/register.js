@@ -22,6 +22,11 @@ async function checkEmptyFields(e) {
       'Password and Confirm must be same !!!';
     document.getElementById('error-message').style.display = 'block';
     return false;
+  } else if (!isAgeValid(dobInput.value)) {
+    document.getElementById('error-message').innerText =
+      'Age must in range from 16 to 100';
+    document.getElementById('error-message').style.display = 'block';
+    return false;
   }
   try {
     const response = await axios
@@ -43,5 +48,24 @@ async function checkEmptyFields(e) {
     alert(err);
     // window.location.href = 'http://localhost:3000/room/create';
   }
+}
+function isAgeValid(dob, minAge = 16, maxAge = 100) {
+  // Parse the date of birth
+  const birthDate = new Date(dob);
+
+  // Get today's date
+  const today = new Date();
+
+  // Calculate the difference in years
+  let age = today.getFullYear() - birthDate.getFullYear();
+
+  // Adjust age if the birthdate has not occurred yet this year
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+  const dayDifference = today.getDate() - birthDate.getDate();
+  if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+    age--;
+  }
+  // Check if the age is within the valid range
+  return age >= minAge && age < maxAge;
 }
 document.getElementById('signUp').addEventListener('submit', checkEmptyFields);

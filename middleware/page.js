@@ -1,5 +1,5 @@
 'use strict';
-
+const { Op } = require('sequelize');
 async function Pagination(currentPage, db) {
   const page = currentPage;
   const perPage = 5;
@@ -8,6 +8,80 @@ async function Pagination(currentPage, db) {
     const total = await db.count();
     const totalPages = Math.ceil(total / perPage);
     const object = await db.findAll({
+      offset: offset,
+      limit: perPage,
+    });
+    const objects = object.map(object => object.get({ plain: true }));
+    const pagesArray = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pagesArray.push(i);
+    }
+    return { objects, pagesArray };
+  } catch (err) {
+    console.log(err);
+  }
+}
+async function PaginationRoom(currentPage, db, filter) {
+  const page = currentPage;
+  const perPage = 6;
+  const offset = (page - 1) * perPage;
+  try {
+    const total = await db.count();
+    const totalPages = Math.ceil(total / perPage);
+    let object;
+    switch (filter) {
+      case 'olded':
+        object = await db.findAll({
+          offset: offset,
+          limit: perPage,
+          order: [['id', 'ASC']],
+        });
+        break;
+      case 'price':
+        object = await db.findAll({
+          offset: offset,
+          limit: perPage,
+          order: [['price', 'DESC']],
+        });
+        break;
+      case 'capacity':
+        object = await db.findAll({
+          offset: offset,
+          limit: perPage,
+          order: [['capacity', 'DESC']],
+        });
+        break;
+      default:
+        object = await db.findAll({
+          offset: offset,
+          limit: perPage,
+          order: [['id', 'DESC']],
+        });
+        break;
+    }
+    const objects = object.map(object => object.get({ plain: true }));
+    const pagesArray = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pagesArray.push(i);
+    }
+    return { objects, pagesArray };
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function SearchRoom(currentPage, db, name) {
+  const page = currentPage;
+  const perPage = 6;
+  const offset = (page - 1) * perPage;
+  try {
+    const total = perPage;
+    const totalPages = Math.ceil(total / perPage);
+    const object = await db.findAll({
+      where: {
+        name: { [Op.like]: `%${name}%` },
+      },
+      order: [['id', 'DESC']],
       offset: offset,
       limit: perPage,
     });
@@ -70,4 +144,4 @@ async function bookPage(currentPage, db) {
     console.log(err);
   }
 }
-module.exports = { Pagination, userPage, bookPage };
+module.exports = { Pagination, userPage, bookPage, PaginationRoom, SearchRoom };

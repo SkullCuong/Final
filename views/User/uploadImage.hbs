@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class='col-md-4 col-xl-5'>
-        <form id='profile' method='post'>
+        <form id='image' method='post' enctype='multipart/form-data'>
           <div class='row'>
             <div class='card'>
               <div class='card-body'>
@@ -63,85 +63,8 @@
                     hidden
                   />
                 </div>
-                <!-- User Name -->
-                <h5 class='card-title mb-2'>User Name</h5>
                 <div class='text-center mb-2'>
-                  <input
-                    type='text'
-                    name='name'
-                    class='form-control'
-                    placeholder='User Name'
-                    value='{{user.name}}'
-                    readonly
-                  />
-                </div>
-                <!-- Email -->
-                <h5 class='card-title mb-2'>Email</h5>
-                <div class='text-center mb-2'>
-                  <input
-                    type='text'
-                    name='email'
-                    class='form-control'
-                    placeholder='Email'
-                    value='{{user.email}}'
-                    readonly
-                  />
-                </div>
-                <!-- Phone Number -->
-                <h5 class='card-title mb-2'>Phone Number</h5>
-                <div class='text-center mb-2'>
-                  <input
-                    type='text'
-                    name='phone'
-                    class='form-control'
-                    placeholder='Phone Number'
-                    value='{{user.phone}}'
-                  />
-                </div>
-                <h5 class='card-title mb-2'>Address</h5>
-                <div class='text-center mb-2'>
-                  <input
-                    type='text'
-                    name='address'
-                    class='form-control'
-                    placeholder='Address'
-                    value='{{user.address}}'
-                  />
-                </div>
-                <!-- Sex -->
-                <h5 class='card-title mb-2'>Sex</h5>
-                <div class='text-center mb-2'>
-                  {{#if user.sex}}
-                    <select
-                      name='sex'
-                      class='form-control'
-                      aria-label='Default select example'
-                    >
-                      <option value='true'>Male</option>
-                      <option value='false'>Female</option>
-                    </select>
-                  {{else}}
-                    <select
-                      name='sex'
-                      class='form-control'
-                      aria-label='Default select example'
-                    >
-                      <option value='false'>Female</option>
-                      <option value='true'>Male</option>
-                    </select>
-                  {{/if}}
-                </div>
-                <!-- Dob -->
-                <h5 class='card-title mb-2'>Date Of Birth</h5>
-                <div class='text-center mb-2'>
-                  <input
-                    type='text'
-                    name='date'
-                    class='form-control'
-                    placeholder='Date Of Birth'
-                    value='{{user.dob}}'
-                    readonly
-                  />
+                  <input type='file' name='image' class='form-control' />
                 </div>
                 <div
                   id='error-message'
@@ -162,4 +85,4 @@
     </div>
   </div>
 </div>
-<script src='/assets/js/account/profile.js'></script>
+<script src='/assets/js/account/image.js'></script>
