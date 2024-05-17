@@ -1,17 +1,20 @@
 async function checkUpdate(e) {
   e.preventDefault();
   // Get references to input elements
+  const idInput = document.querySelector('input[name="id"]');
   const nameInput = document.querySelector('input[name="name"]');
   const typeInput = document.querySelector('input[name="type"]');
   const floorInput = document.querySelector('input[name="floor"]');
   const priceInput = document.querySelector('input[name="price"]');
   const capacityInput = document.querySelector('input[name="capacity"]');
+  const imageInput = document.querySelector('input[name="image"]');
   if (
     nameInput.value === '' ||
     typeInput.value === '' ||
     floorInput.value === '' ||
     priceInput.value === '' ||
-    capacityInput.value === ''
+    capacityInput.value === '' ||
+    imageInput.value === ''
   ) {
     document.getElementById('error-message').style.display = 'block';
     return false;
@@ -20,7 +23,7 @@ async function checkUpdate(e) {
     const response = await axios
       .post(
         'http://localhost:3000/room/checkexist',
-        { name: nameInput.value },
+        { id: idInput.value, name: nameInput.value },
         { headers: { 'Content-Type': 'application/json' } }
       )
       .then(response => {

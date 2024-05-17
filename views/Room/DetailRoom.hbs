@@ -17,31 +17,14 @@
       </div>
       <div class='col-lg-4'>
         <div class='right-content'>
-          <h4>{{room.name}}</h4>
-          <span class='price'>${{room.price}}</span>
-          <ul class='stars'>
-            <li><i class='fa fa-star'></i></li>
-            <li><i class='fa fa-star'></i></li>
-            <li><i class='fa fa-star'></i></li>
-            <li><i class='fa fa-star'></i></li>
-            <li><i class='fa fa-star'></i></li>
-          </ul>
+          <h2>{{room.name}}</h2>
+          <h5 class='price' style='margin-top: 30px;'>Price : ${{room.price}}</h5>
           <h5 style='margin-top: 30px;'>Type : {{room.type}}</h5>
           <div class='quote'>
             <h5>Room Floor : {{room.floor}}</h5>
           </div>
-          <div class='quantity-content'>
-            <div class='left-content'>
-              <h6>Capacity : {{room.capacity}}</h6>
-            </div>
-            <div class='right-content'>
-              <div class='quantity buttons_added'>
-                <p></p>
-              </div>
-            </div>
-          </div>
-          <div class='total'>
-            <h4>Total: ${{room.price}}</h4>
+          <h5 style='margin-top: 30px;'>Capacity : {{room.capacity}}</h5>
+          <div class='total' style='margin-top: 50px;'>
             <div class='main-border-button'><a
                 href='/booking/book/{{room.id}}'
               >Add To Cart</a></div>

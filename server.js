@@ -36,6 +36,9 @@ async function createRoles() {
 Handlebars.registerHelper('isCurrentPage', function (currentPage, pageNumber) {
   return currentPage == pageNumber;
 });
+Handlebars.registerHelper('equal', function (a, b) {
+  return a === b;
+});
 
 app.get('/', username.name, (req, res) => {
   console.log(res.locals.username);

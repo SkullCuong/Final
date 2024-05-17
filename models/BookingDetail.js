@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const BookingDetail = sequelize.define(
-    "BookingDetail",
+    'BookingDetail',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -15,13 +15,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      check_in: {
+      status: {
         type: DataTypes.STRING,
-        allowNull: true,
-      },
-      check_out: {
-        type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
     },
     {
@@ -30,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   //Declare realation
-  BookingDetail.associate = (models) => {
+  BookingDetail.associate = models => {
     BookingDetail.belongsTo(models.Booking, {
       foreignKey: {
         allowNull: false,

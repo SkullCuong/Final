@@ -2,7 +2,7 @@
 const { where } = require('sequelize');
 const db = require('../models/index');
 const BookingDetail = require('./BookingDetail');
-const { bookPage } = require('../middleware/page');
+const { bookPage, bookDetailPage } = require('../middleware/page');
 class Booking {
   constructor(date, Userid) {
     this.date = date;
@@ -10,10 +10,15 @@ class Booking {
   }
 
   static async bookRender(req, res) {
-    const { id } = req.body.user;
-    const roomId = req.params.id;
-    console.log(roomId);
-    res.render('Booking/book', { id, roomId });
+    try {
+      const { id, username } = req.body.user;
+      const roomId = req.params.id;
+      const roomDb = await db.Room.findByPk(roomId);
+      const room = roomDb.get({ plain: true });
+      res.render('Booking/book', { id, username, room });
+    } catch (err) {
+      console.log('12312');
+    }
   }
 
   static async book(req, res) {
@@ -67,7 +72,6 @@ class Booking {
   static async indexAdmin(req, res) {
     const currentPage = req.query.page || 1;
     const { objects, pagesArray } = await bookPage(currentPage, db);
-    console.log(pagesArray);
     res.render('Booking/indexAdmin', {
       layout: 'admin',
       book: objects,
@@ -75,13 +79,81 @@ class Booking {
       currentPage,
     });
   }
+  static async detailAdminRender(req, res) {
+    const { id } = req.params;
+    const currentPage = req.query.page || 1;
+    const { objects, pagesArray } = await bookDetailPage(currentPage, db, id);
+    res.render('Booking/bookingAdmin', {
+      id: id,
+      layout: 'admin',
+      bookdetail: objects,
+      pagesArray,
+      currentPage,
+    });
+  }
 
+  // // Change Status
+  static async changeStatusRender(req, res) {
+    try {
+      const { id } = req.params;
+      res.render('Booking/status', { layout: 'admin', id: id });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  static async changeStatus(req, res) {
+    try {
+      const { status, id } = req.body;
+      await db.Bookingdetail.update({ status: status }, { where: { id } });
+      res.redirect(`/booking/index`);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // // API Check valid
+  static async checkDate(req, res) {
+    try {
+      const { id, checkIn, checkOut } = req.body;
+      const status = 'Pending';
+      const bookingDb = await db.Bookingdetail.findAll({
+        where: { RoomId: id, status },
+      });
+      const booking = bookingDb.map(object => object.get({ plain: true }));
+      console.log(booking);
+      const result = Booking.checkValid(booking, checkIn, checkOut);
+      if (result) {
+        res.json({ valid: true });
+      } else {
+        res.json({ valid: false });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   static async date() {
     const dateObject = new Date();
     const year = dateObject.getFullYear();
     const month = dateObject.getMonth() + 1;
     const day = dateObject.getDate();
     return [year, month, day].join('-');
+  }
+  // // Find min and max date;
+  static checkValid(bookings, givenCheckIn, givenCheckOut) {
+    const checkIn = new Date(givenCheckIn);
+    const checkOut = new Date(givenCheckOut);
+    for (const booking of bookings) {
+      const bookingCheckIn = new Date(booking.order_check_in);
+      const bookingCheckOut = new Date(booking.order_check_out);
+      if (
+        (checkIn >= bookingCheckIn && checkIn <= bookingCheckOut) ||
+        (checkOut >= bookingCheckIn && checkOut <= bookingCheckOut) ||
+        (checkIn <= bookingCheckIn && checkOut >= bookingCheckOut)
+      ) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 module.exports = Booking;

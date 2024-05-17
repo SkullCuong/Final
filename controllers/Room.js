@@ -157,9 +157,9 @@ class Room {
   }
 
   static async checkExist(req, res) {
-    const { name } = req.body;
+    const { name, id } = req.body;
     const room = await db.Room.findOne({ where: { name: name } });
-    if (room) {
+    if (room && room.id != id) {
       res.json({ exist: true });
     } else {
       res.json({ exist: false });

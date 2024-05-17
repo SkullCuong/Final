@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const sendMail = require('./sendMail');
 const { v4: uuidv4 } = require('uuid');
 const { Pagination, userPage } = require('../middleware/page');
-const { where } = require('sequelize');
 class User {
   constructor(
     name,
@@ -73,6 +72,7 @@ class User {
 
   static async confirm(req, res) {
     const { token } = req.query;
+    console.log(token);
     const isActive = true;
     try {
       const [row] = await db.User.update(
@@ -81,8 +81,9 @@ class User {
       );
       if (row != 0) {
         res.redirect('/user/login');
+      } else {
+        res.redirect('/user/login');
       }
-      res.redirect('/user/login');
     } catch (err) {
       console.log(err);
     }
@@ -101,9 +102,11 @@ class User {
       const user = await db.User.findOne({
         where: { email: email },
       });
-      const validPassword = await brypt.compare(password, user.password);
-      if (user && validPassword) {
-        res.json({ valid: true });
+      if (user) {
+        const validPassword = await brypt.compare(password, user.password);
+        if (validPassword) {
+          res.json({ valid: true });
+        }
       } else {
         res.json({ valid: false });
       }

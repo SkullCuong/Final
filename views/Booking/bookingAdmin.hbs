@@ -1,0 +1,46 @@
+<table class='table'>
+  <thead class='thead-dark'>
+    <tr style='text-align:center;'>
+      <th scope='col'>Check In</th>
+      <th scope='col'>Check Out</th>
+      <th scope='col'>Room Name</th>
+      <th scope='col'>Status</th>
+      <th scope='col'>Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each bookdetail}}
+      <tr style='text-align:center;'>
+        <td>{{order_check_in}}</td>
+        <td>{{order_check_out}}</td>
+        <td>{{Room.name}}</td>
+        <td>
+          {{#if (equal  status 'Pending')}}
+          <span class="badge badge-primary">{{status}}</span>
+          {{else}}
+            {{#if (equal  status 'Cancel')}}
+              <span class="badge badge-danger">{{status}}</span>
+            {{else}}
+              <span class="badge badge-success">{{status}}</span>
+            {{/if}}
+          {{/if}}
+        </td>
+        <td>
+            <a href='/booking/status/{{id}}' style='color: black;'><i
+                class='fa-solid fa-pen-to-square'
+              ></i></a>
+          </td>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<nav aria-label="Pagenavigation">
+  <ul class="pagination justify-content-center">
+    {{#each pagesArray}}
+      <li {{#if (isCurrentPage ../currentPage this)}} class="page-item" {{/if}}>
+        <a class="page-link" href='/booking/detail/{{../id}}?page={{this}}'>{{this}}</a>
+      </li>
+    {{/each}}
+  </ul>
+</nav>

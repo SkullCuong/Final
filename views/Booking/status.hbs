@@ -1,0 +1,31 @@
+<div class='container'>
+  <div class='row justify-content-center'>
+    <div class='col-12 col-lg-6'>
+      <form method='post'>
+        <div class='row'>
+          <div class='card'>
+            <div class='card-header'>
+              <h2 class='mb-0 text-center'><strong>Order Status</strong></h2>
+            </div>
+            <input type='text' name='id' value='{{id}}' hidden /><br />
+            <div class='card-body'>
+              <h5 class='card-title mb-2'>Status</h5>
+              <select
+                name='status'
+                class='form-select mb-3'
+                aria-label='Default select example'
+              >
+                <option value='Done'>Done</option>
+                <option value='Cancel'>Cancel</option>
+                <option value='Pending'>Pending</option>
+              </select>
+              <div class='text-center'>
+                <input type='submit' value='Submit' class='btn btn-secondary' />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
