@@ -2,7 +2,11 @@
 const { where } = require('sequelize');
 const db = require('../models/index');
 const BookingDetail = require('./BookingDetail');
-const { bookPage, bookDetailPage } = require('../middleware/page');
+const {
+  bookPage,
+  bookDetailPage,
+  detailPagination,
+} = require('../middleware/page');
 class Booking {
   constructor(date, Userid) {
     this.date = date;
@@ -154,6 +158,45 @@ class Booking {
       }
     }
     return false;
+  }
+
+  // // Order
+  static async orderRender(req, res) {
+    try {
+      const { id } = req.params;
+      const userDb = await db.User.findByPk(id);
+      const bookDb = await db.Booking.findAll({ where: { UserId: id } });
+      const user = userDb.get({ plain: true });
+      const book = bookDb.map(book => book.get({ plain: true }));
+      res.render('Booking/order', { layout: 'profile', user, book });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  static async orderdetailRender(req, res) {
+    try {
+      const currentPage = req.query.page || 1;
+      console.log(currentPage);
+      const { id } = req.params;
+      const { userid } = req.query;
+      const userDb = await db.User.findByPk(userid);
+      const { objects, pagesArray } = await detailPagination(
+        id,
+        currentPage,
+        db
+      );
+      const user = userDb.get({ plain: true });
+      console.log(objects);
+      res.render('Booking/orderDetail', {
+        id: id,
+        layout: 'profile',
+        pagesArray,
+        user,
+        bookdetail: objects,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 module.exports = Booking;

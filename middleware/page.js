@@ -171,6 +171,36 @@ async function bookDetailPage(currentPage, db, id) {
     console.log(err);
   }
 }
+async function detailPagination(bookingid, currentPage, db) {
+  const page = currentPage;
+  const perPage = 5;
+  const offset = (page - 1) * perPage;
+  try {
+    const status = 'Pending';
+    const total = await db.Bookingdetail.count({
+      where: { BookingId: bookingid, status },
+    });
+    console.log(total);
+    const totalPages = Math.ceil(total / perPage);
+    const object = await db.Bookingdetail.findAll({
+      offset: offset,
+      limit: perPage,
+      where: { BookingId: bookingid, status },
+      include: {
+        model: db.Room,
+        attributes: ['name'],
+      },
+    });
+    const objects = object.map(object => object.get({ plain: true }));
+    const pagesArray = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pagesArray.push(i);
+    }
+    return { objects, pagesArray };
+  } catch (err) {
+    console.log(err);
+  }
+}
 module.exports = {
   Pagination,
   userPage,
@@ -178,4 +208,5 @@ module.exports = {
   PaginationRoom,
   SearchRoom,
   bookDetailPage,
+  detailPagination,
 };

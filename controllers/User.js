@@ -196,8 +196,8 @@ class User {
   }
 
   static async profileRender(req, res) {
-    const { id } = req.body.user;
     try {
+      const { id } = req.body.user;
       const userDb = await db.User.findByPk(id);
       const user = userDb.get({ plain: true });
       res.render('User/profile', { layout: 'profile', user });

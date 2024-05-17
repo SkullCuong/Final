@@ -18,4 +18,9 @@ router.get('/detail/:id', bookingController.detailAdminRender);
 
 // // API To Check Date
 router.post('/checkdate', bookingController.checkDate);
+
+// // Manage Order
+
+router.get('/order/:id', bookingController.orderRender);
+router.get('/orderdetail/:id', bookingController.orderdetailRender);
 module.exports = router;

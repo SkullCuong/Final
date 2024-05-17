@@ -1,0 +1,87 @@
+<!-- ***** Header Area End ***** -->
+<div class='main-banner' id='top' style='padding-bottom: 60px;'>
+  <div class='container-fluid'>
+    <div class='row justify-content-center'>
+      <div class='col-md-4 col-xl-3'>
+        <div class='card mb-2'>
+          <div class='card-body text-center'>
+            <h5 class='card-title mb-4'>Profile</h5>
+            <img
+              src='/images/{{user.image_url}}'
+              class='assets/images-fluid rounded-circle mb-2'
+              width='128'
+              height='128'
+            />
+            <h3 class='mb-0'>{{user.name}}</h3>
+            <div class='text-muted mb-0'>{{user.email}}</div>
+            <div class='card-body'>
+              <hr />
+              <ul class='list-unstyled mb-0'>
+                <li class='sidebar-item'>
+                  <a class='profilebar-link active' href='/user/profile'>
+                    <span class='align-middle'>Profile</span>
+                  </a>
+                </li>
+                <li class='sidebar-item'>
+                  <a
+                    class='profilebar-link active'
+                    href='/booking/order/{{user.id}}'
+                  >
+                    <span class='align-middle'>Manage Order</span>
+                  </a>
+                </li>
+                <li class='sidebar-item'>
+                  <a class='profilebar-link active' href='/user/image'>
+                    <span class='align-middle'>Change Avatar</span>
+                  </a>
+                </li>
+                <li class='sidebar-item'>
+                  <a class='profilebar-link active' href='/user/password'>
+                    <span class='align-middle'>Change Password</span>
+                  </a>
+                </li>
+                <li class='sidebar-item'>
+                  <a class='profilebar-link active' href='#'>
+                    <span class='align-middle'>Logout</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-4 col-xl-5'>
+        <div class='row'>
+          <div class='card'>
+            <div class='card-body'>
+              <table class='table'>
+                  <thead class='thead-dark'>
+                    <tr style='text-align:center;'>
+                      <th scope='col'>ID</th>
+                      <th scope='col'>Date</th>
+                      <th scope='col'>Detail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each book}}
+                      <tr style='text-align:center;'>
+                        <td>{{id}}</td>
+                        <td>{{date}}</td>
+                        <td>
+                            <a href='/booking/orderdetail/{{id}}?userid={{../user.id}}' style='color: black;'><i
+                                class='fa-solid fa-magnifying-glass'
+                              ></i></a>
+                          </td>
+                        </td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+               </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src='/assets/js/account/profile.js'></script>
