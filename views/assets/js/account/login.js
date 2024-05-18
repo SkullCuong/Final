@@ -8,15 +8,24 @@ async function checkEmptyFields(e) {
     return false;
   } else {
     // Validate the email and password
-    const isValidAccount = await isValid(nameInput.value, passwordInput.value);
-    if (!isValidAccount) {
+    const { valid, isActive } = await isValid(
+      nameInput.value,
+      passwordInput.value
+    );
+    if (!valid) {
       document.getElementById('error-message').innerText =
         'Account is not valid !!!';
       document.getElementById('error-message').style.display = 'block';
       return false;
     } else {
-      // Uncomment the line below if you want to submit the form after validation
-      document.getElementById('login').submit();
+      if (!isActive) {
+        document.getElementById('error-message').innerText =
+          'Please active your account by clicking the link in your email';
+        document.getElementById('error-message').style.display = 'block';
+        return false;
+      } else {
+        document.getElementById('login').submit();
+      }
     }
   }
 }
@@ -27,9 +36,9 @@ async function isValid(email, password) {
       { email: email, password: password },
       { headers: { 'Content-Type': 'application/json' } }
     );
-    return response.data.valid;
+    return response.data;
   } catch (err) {
-    window.location.href = 'http://localhost:3000/room/create';
+    console.log(err);
   }
 }
 document.getElementById('login').addEventListener('submit', checkEmptyFields);

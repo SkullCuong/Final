@@ -1,5 +1,5 @@
 'use strict';
-
+const { Sequelize, Op } = require('sequelize');
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -39,15 +39,30 @@ Handlebars.registerHelper('isCurrentPage', function (currentPage, pageNumber) {
 Handlebars.registerHelper('equal', function (a, b) {
   return a === b;
 });
-
-app.get('/', username.name, (req, res) => {
-  console.log(res.locals.username);
-  res.render('home/index');
-});
-app.post('/123', (req, res) => {
-  console.log(req.body);
+Handlebars.registerHelper('json', function (context) {
+  return JSON.stringify(context);
 });
 // Admin Page
-app.get('/admin', (req, res) => {
-  res.render('admin/index', { layout: 'admin' });
+app.get('/admin', async (req, res) => {
+  const currentYear = new Date().getFullYear();
+  await db.Bookingdetail.findAll({
+    attributes: [
+      [Sequelize.fn('MONTH', Sequelize.col('order_check_in')), 'month'],
+      [Sequelize.fn('COUNT', '*'), 'count'],
+    ],
+    where: {
+      [Sequelize.literal(`YEAR(order_check_in) = ${currentYear}`)]:
+        Sequelize.literal('status != "Cancel"'),
+    },
+    group: ['month'],
+  })
+    .then(result => {
+      const labels = result.map(row => row.getDataValue('month'));
+      const data = result.map(row => row.getDataValue('count'));
+      res.render('admin/index', { layout: 'admin', labels, data });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });

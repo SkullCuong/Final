@@ -64,7 +64,7 @@ class User {
       await db.User.create(user);
       await sendMail
         .sendMail('Account Confirmation', htmlBody, email)
-        .then(res.render('User/activeAccount'));
+        .then(res.redirect('/user/login'));
     } catch (err) {
       console.log(err);
     }
@@ -97,19 +97,20 @@ class User {
   // // Api For Login
   static async isValid(req, res) {
     const { email, password } = req.body;
-    console.log(email, password);
     try {
+      let valid = false;
+      let isActive = false;
       const user = await db.User.findOne({
         where: { email: email },
       });
       if (user) {
         const validPassword = await brypt.compare(password, user.password);
         if (validPassword) {
-          res.json({ valid: true });
+          valid = true;
+          isActive = user.isActive;
         }
-      } else {
-        res.json({ valid: false });
       }
+      res.json({ valid: valid, isActive });
     } catch (err) {
       console.log(err);
     }
@@ -129,7 +130,11 @@ class User {
           maxAge: 30 * 24 * 60 * 60 * 1000,
           sameSite: 'strict',
         });
-        res.redirect('/');
+        if (user.RoleId != 1) {
+          res.redirect('/');
+        } else {
+          res.redirect('/admin');
+        }
       }
     } catch (err) {
       console.log(err);
@@ -289,7 +294,6 @@ class User {
 
   static async checkExist(req, res) {
     const { email } = req.body;
-    console.log(email);
     const User = await db.User.findOne({ where: { email: email } });
     if (User) {
       res.json({ exist: true });

@@ -197,7 +197,6 @@ class Booking {
       console.log(err);
     }
   }
-
   static async userCancel(req, res) {
     try {
       const { id, userid } = req.body;

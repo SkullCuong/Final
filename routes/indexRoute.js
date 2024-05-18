@@ -6,10 +6,19 @@ const roleRoute = require('../routes/RoleRoute');
 const userRoute = require('../routes/UserRoute');
 const bookingRoute = require('../routes/BookingRoute');
 const homeRoute = require('../routes/HomeRoute');
-const username = require('../middleware/username');
-router.use('/room', username.name, roomRoute);
-router.use('/role', roleRoute);
+const accountVerify = require('../middleware/account.js');
+
+// // Middleware
+
+router.use('/room', accountVerify.verifyToken, roomRoute);
+router.use(
+  '/role',
+  accountVerify.verifyToken,
+  accountVerify.isAdmin,
+  roleRoute
+);
 router.use('/user', userRoute);
-router.use('/booking', bookingRoute);
+router.use('/booking', accountVerify.verifyToken, bookingRoute);
 router.use('/home', homeRoute);
+
 module.exports = router;
