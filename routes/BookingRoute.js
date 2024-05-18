@@ -23,4 +23,7 @@ router.post('/checkdate', bookingController.checkDate);
 
 router.get('/order/:id', bookingController.orderRender);
 router.get('/orderdetail/:id', bookingController.orderdetailRender);
+
+// // Booking Cancel
+router.post('/cancel', bookingController.userCancel);
 module.exports = router;

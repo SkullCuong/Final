@@ -146,7 +146,6 @@ async function bookPage(currentPage, db) {
 }
 async function bookDetailPage(currentPage, db, id) {
   const page = currentPage;
-  console.log(id);
   const perPage = 5;
   const offset = (page - 1) * perPage;
   try {
@@ -180,7 +179,6 @@ async function detailPagination(bookingid, currentPage, db) {
     const total = await db.Bookingdetail.count({
       where: { BookingId: bookingid, status },
     });
-    console.log(total);
     const totalPages = Math.ceil(total / perPage);
     const object = await db.Bookingdetail.findAll({
       offset: offset,
@@ -190,6 +188,7 @@ async function detailPagination(bookingid, currentPage, db) {
         model: db.Room,
         attributes: ['name'],
       },
+      order: [['id', 'DESC']],
     });
     const objects = object.map(object => object.get({ plain: true }));
     const pagesArray = [];

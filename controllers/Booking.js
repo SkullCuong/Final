@@ -186,7 +186,6 @@ class Booking {
         db
       );
       const user = userDb.get({ plain: true });
-      console.log(objects);
       res.render('Booking/orderDetail', {
         id: id,
         layout: 'profile',
@@ -194,6 +193,17 @@ class Booking {
         user,
         bookdetail: objects,
       });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async userCancel(req, res) {
+    try {
+      const { id, userid } = req.body;
+      const status = 'Cancel';
+      await db.Bookingdetail.update({ status }, { where: { id: id } });
+      res.redirect(`/booking/order/${userid}`);
     } catch (err) {
       console.log(err);
     }
