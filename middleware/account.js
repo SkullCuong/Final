@@ -25,5 +25,12 @@ const accountVerify = {
       res.redirect('/room');
     }
   },
+  isLogin: (req, res, next) => {
+    const token = req.cookies.access_token;
+    if (token) {
+      res.redirect('/room');
+    }
+    next();
+  },
 };
 module.exports = accountVerify;

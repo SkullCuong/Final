@@ -30,8 +30,30 @@ db.sequelize.sync({ force: false }).then(async () => {
 });
 
 async function createRoles() {
+  const pass = '$2b$10$/vOj2IJBsv17qz.uldVdI.9A14xlAAKlloOqrd3qbYtrQnq20OS4G';
+  const dob = '2002-05-17';
+  const sex = true;
+  const address = 'none';
+  const image_url = 'default.jpg';
+  const isActive = 'true';
+  const RoleId = 1;
+  const phone = 'none';
   await db.Role.findOrCreate({ where: { name: 'Admin' } });
   await db.Role.findOrCreate({ where: { name: 'User' } });
+  await db.User.findOrCreate({
+    where: {
+      name: 'Admin',
+      email: 'Admin',
+      password: pass,
+      dob,
+      sex,
+      address,
+      image_url,
+      isActive,
+      RoleId,
+      phone,
+    },
+  });
 }
 Handlebars.registerHelper('isCurrentPage', function (currentPage, pageNumber) {
   return currentPage == pageNumber;

@@ -14,8 +14,8 @@ router.get('/change', userController.changePassRender);
 router.post('/change', userController.changePass);
 
 router.get('/confirm', userController.confirm);
-router.get('/login', userController.signInRender);
-router.post('/login', userController.signIn);
+router.get('/login', account.isLogin, userController.signInRender);
+router.post('/login', account.isLogin, userController.signIn);
 router.get('/logout', account.verifyToken, userController.signOut);
 router.get('/profile', account.verifyToken, userController.profileRender);
 router.post('/profile', account.verifyToken, userController.profileUpdate);
