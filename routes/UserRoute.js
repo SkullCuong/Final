@@ -3,7 +3,6 @@ const router = express.Router();
 const userController = require('../controllers/User');
 const account = require('../middleware/account');
 const uploadImage = require('../middleware/uploadImage');
-const { route } = require('./RoomRoute');
 // router.get('/', roomController.index);
 router.get('/register', userController.signUpRender);
 router.post('/register', userController.signUp);
@@ -17,7 +16,7 @@ router.post('/change', userController.changePass);
 router.get('/confirm', userController.confirm);
 router.get('/login', userController.signInRender);
 router.post('/login', userController.signIn);
-router.get('/logout', userController.signOut);
+router.get('/logout', account.verifyToken, userController.signOut);
 router.get('/profile', account.verifyToken, userController.profileRender);
 router.post('/profile', account.verifyToken, userController.profileUpdate);
 

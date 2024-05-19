@@ -18,7 +18,7 @@ router.use(
   roleRoute
 );
 router.use('/user', userRoute);
-router.use('/booking', accountVerify.verifyToken, bookingRoute);
+router.use('/booking', bookingRoute);
 router.use('/home', homeRoute);
 
 module.exports = router;
