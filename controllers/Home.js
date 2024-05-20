@@ -1,10 +1,10 @@
 'use strict';
 class Home {
-  static async about(req, res) {
-    res.render('Home/about');
+  static async err(req, res) {
+    res.render('home/err');
   }
-  static async contact(req, res) {
-    res.render('Home/contact');
+  static async homepage(req, res) {
+    res.redirect('/room');
   }
 }
 module.exports = Home;

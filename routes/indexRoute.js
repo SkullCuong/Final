@@ -7,7 +7,7 @@ const userRoute = require('../routes/UserRoute');
 const bookingRoute = require('../routes/BookingRoute');
 const homeRoute = require('../routes/HomeRoute');
 const accountVerify = require('../middleware/account.js');
-
+const homeController = require('../controllers/home');
 // // Middleware
 
 router.use('/room', accountVerify.verifyToken, roomRoute);
@@ -20,5 +20,6 @@ router.use(
 router.use('/user', userRoute);
 router.use('/booking', bookingRoute);
 router.use('/home', homeRoute);
+router.use('/', homeController.homepage);
 
 module.exports = router;

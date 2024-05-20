@@ -18,7 +18,7 @@ async function Pagination(currentPage, db) {
     }
     return { objects, pagesArray };
   } catch (err) {
-    console.log(err);
+    res.redirect('/home/err');
   }
 }
 async function PaginationRoom(currentPage, db, filter) {
@@ -66,7 +66,7 @@ async function PaginationRoom(currentPage, db, filter) {
     }
     return { objects, pagesArray };
   } catch (err) {
-    console.log(err);
+    res.redirect('/home/err');
   }
 }
 
@@ -92,7 +92,7 @@ async function SearchRoom(currentPage, db, name) {
     }
     return { objects, pagesArray };
   } catch (err) {
-    console.log(err);
+    res.redirect('/home/err');
   }
 }
 

@@ -21,7 +21,7 @@ class Booking {
       const room = roomDb.get({ plain: true });
       res.render('Booking/book', { id, username, room });
     } catch (err) {
-      console.log('12312');
+      res.redirect('/home/err');
     }
   }
 
@@ -41,7 +41,7 @@ class Booking {
       );
       await db.Bookingdetail.create(bookingDetail);
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -55,7 +55,7 @@ class Booking {
     try {
       await db.Bookingdetail.update({ check_in: checkIn }, { where: { id } });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -69,7 +69,7 @@ class Booking {
     try {
       await db.Bookingdetail.update({ check_out: checkOut }, { where: { id } });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -102,7 +102,7 @@ class Booking {
       const { id } = req.params;
       res.render('Booking/status', { layout: 'admin', id: id });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async changeStatus(req, res) {
@@ -111,7 +111,7 @@ class Booking {
       await db.Bookingdetail.update({ status: status }, { where: { id } });
       res.redirect(`/booking/index`);
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -132,7 +132,7 @@ class Booking {
         res.json({ valid: false });
       }
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async date() {
@@ -170,7 +170,7 @@ class Booking {
       const book = bookDb.map(book => book.get({ plain: true }));
       res.render('Booking/order', { layout: 'profile', user, book });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async orderdetailRender(req, res) {
@@ -194,7 +194,7 @@ class Booking {
         bookdetail: objects,
       });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async userCancel(req, res) {
@@ -204,7 +204,7 @@ class Booking {
       await db.Bookingdetail.update({ status }, { where: { id: id } });
       res.redirect(`/booking/order/${userid}`);
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 }
