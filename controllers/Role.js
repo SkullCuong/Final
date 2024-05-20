@@ -28,7 +28,7 @@ class Role {
       await db.Role.create(role);
       res.redirect('/role');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async updateRender(req, res) {
@@ -40,7 +40,7 @@ class Role {
         res.render('Role/UpdateRole', { layout: 'admin', role: role });
       }
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async update(req, res) {
@@ -50,16 +50,20 @@ class Role {
       await db.Role.update({ name }, { where: { id: id } });
       res.redirect('/role');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async checkExist(req, res) {
-    const { name } = req.body;
-    const Role = await db.Role.findOne({ where: { name: name } });
-    if (Role) {
-      res.json({ exist: true });
-    } else {
-      res.json({ exist: false });
+    try {
+      const { name } = req.body;
+      const Role = await db.Role.findOne({ where: { name: name } });
+      if (Role) {
+        res.json({ exist: true });
+      } else {
+        res.json({ exist: false });
+      }
+    } catch (err) {
+      res.redirect('/home/err');
     }
   }
 }

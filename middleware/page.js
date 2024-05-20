@@ -115,7 +115,7 @@ async function userPage(currentPage, db) {
     }
     return { objects, pagesArray };
   } catch (err) {
-    console.log(err);
+    res.redirect('/home/err');
   }
 }
 
@@ -141,7 +141,7 @@ async function bookPage(currentPage, db) {
     }
     return { objects, pagesArray };
   } catch (err) {
-    console.log(err);
+    res.redirect('/home/err');
   }
 }
 async function bookDetailPage(currentPage, db, id) {
@@ -167,7 +167,7 @@ async function bookDetailPage(currentPage, db, id) {
     }
     return { objects, pagesArray };
   } catch (err) {
-    console.log(err);
+    res.redirect('/home/err');
   }
 }
 async function detailPagination(bookingid, currentPage, db) {
@@ -197,7 +197,7 @@ async function detailPagination(bookingid, currentPage, db) {
     }
     return { objects, pagesArray };
   } catch (err) {
-    console.log(err);
+    res.redirect('/home/err');
   }
 }
 module.exports = {

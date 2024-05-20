@@ -8,6 +8,7 @@ const bookingRoute = require('../routes/BookingRoute');
 const homeRoute = require('../routes/HomeRoute');
 const accountVerify = require('../middleware/account.js');
 const homeController = require('../controllers/home');
+const adminRoute = require('../routes/admin.js');
 // // Middleware
 
 router.use('/room', accountVerify.verifyToken, roomRoute);
@@ -20,6 +21,12 @@ router.use(
 router.use('/user', userRoute);
 router.use('/booking', bookingRoute);
 router.use('/home', homeRoute);
+router.use(
+  '/admin',
+  accountVerify.verifyToken,
+  accountVerify.isAdmin,
+  adminRoute
+);
 router.use('/', homeController.homepage);
 
 module.exports = router;

@@ -55,7 +55,7 @@ async function valid(id, checkIn, checkout) {
     );
     return response.data.valid;
   } catch (err) {
-    console.log(err);
+    window.location.href = 'http://localhost:3000/home/err';
   }
 }
 document

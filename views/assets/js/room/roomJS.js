@@ -35,7 +35,7 @@ async function checkEmptyFields(e) {
       document.getElementById('roomForm').submit();
     }
   } catch (err) {
-    window.location.href = 'http://localhost:3000/room/create';
+    window.location.href = 'http://localhost:3000/home/err';
   }
 }
 document

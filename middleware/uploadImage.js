@@ -18,9 +18,8 @@ const upload = multer({
 async function uploadImage(req, res, next) {
   upload.single('image')(req, res, async err => {
     if (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
-    console.log(req.file.filename);
     next();
   });
 }

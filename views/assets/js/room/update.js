@@ -36,7 +36,7 @@ async function checkUpdate(e) {
       document.getElementById('roomUpdate').submit();
     }
   } catch (err) {
-    window.location.href = 'http://localhost:3000/room/create';
+    window.location.href = 'http://localhost:3000/home/err';
   }
 }
 

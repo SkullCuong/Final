@@ -38,7 +38,7 @@ async function isValid(email, password) {
     );
     return response.data;
   } catch (err) {
-    console.log(err);
+    window.location.href = 'http://localhost:3000/home/err';
   }
 }
 document.getElementById('login').addEventListener('submit', checkEmptyFields);

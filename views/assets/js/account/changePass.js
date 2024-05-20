@@ -40,7 +40,7 @@ async function isValid(email, password) {
     );
     return response.data.valid;
   } catch (err) {
-    window.location.href = 'http://localhost:3000/room/create';
+    window.location.href = 'http://localhost:3000/home/err';
   }
 }
 document

@@ -21,10 +21,10 @@ async function checkEmptyFields(e) {
       document.getElementById('error-message').innerText = 'Role exists! ';
       document.getElementById('error-message').style.display = 'block';
     } else {
-      document.getElementById('roomForm').submit();
+      document.getElementById('roleCreate').submit();
     }
   } catch (err) {
-    window.location.href = 'http://localhost:3000/room/create';
+    window.location.href = 'http://localhost:3000/home/err';
   }
 }
 document

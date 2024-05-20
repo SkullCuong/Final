@@ -45,8 +45,7 @@ async function checkEmptyFields(e) {
       document.getElementById('signUp').submit();
     }
   } catch (err) {
-    alert(err);
-    // window.location.href = 'http://localhost:3000/room/create';
+    window.location.href = 'http://localhost:3000/home/err';
   }
 }
 function isAgeValid(dob, minAge = 16, maxAge = 100) {

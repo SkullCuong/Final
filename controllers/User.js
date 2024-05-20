@@ -66,7 +66,7 @@ class User {
         .sendMail('Account Confirmation', htmlBody, email)
         .then(res.redirect('/user/login'));
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -85,7 +85,7 @@ class User {
         res.redirect('/user/login');
       }
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -112,7 +112,7 @@ class User {
       }
       res.json({ valid: valid, isActive });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async signIn(req, res) {
@@ -137,7 +137,7 @@ class User {
         }
       }
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -177,7 +177,7 @@ class User {
         .sendMail('New Password', htmlBody, email)
         .then(res.render('User/activeAccount'));
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -196,7 +196,7 @@ class User {
       );
       res.redirect('/user/login');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -207,7 +207,7 @@ class User {
       const user = userDb.get({ plain: true });
       res.render('User/profile', { layout: 'profile', user });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -218,7 +218,7 @@ class User {
       const user = userDb.get({ plain: true });
       res.render('user/changePass', { layout: 'profile', user });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -235,7 +235,7 @@ class User {
       }
       res.redirect('/user/logout');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -248,7 +248,7 @@ class User {
       );
       res.redirect('/user/profile');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -274,7 +274,7 @@ class User {
         roles: roles,
       });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -287,18 +287,22 @@ class User {
         { where: { id: id } }
       );
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
     res.redirect('/User');
   }
 
   static async checkExist(req, res) {
-    const { email } = req.body;
-    const User = await db.User.findOne({ where: { email: email } });
-    if (User) {
-      res.json({ exist: true });
-    } else {
-      res.json({ exist: false });
+    try {
+      const { email } = req.body;
+      const User = await db.User.findOne({ where: { email: email } });
+      if (User) {
+        res.json({ exist: true });
+      } else {
+        res.json({ exist: false });
+      }
+    } catch (err) {
+      res.redirect('/home/err');
     }
   }
 
@@ -331,24 +335,23 @@ class User {
   // // Upload Image
 
   static async uploadImageRender(req, res) {
-    const { id } = req.body.user;
     try {
+      const { id } = req.body.user;
       const userDb = await db.User.findByPk(id);
       const user = userDb.get({ plain: true });
       res.render('user/uploadImage', { layout: 'profile', user });
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   static async uploadImage(req, res) {
-    const { id } = req.body;
-
     try {
+      const { id } = req.body;
       const { filename } = req.file;
       await db.User.update({ image_url: filename }, { where: { id: id } });
       res.redirect('/user/profile');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 }

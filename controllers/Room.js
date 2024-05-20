@@ -63,7 +63,7 @@ class Room {
         res.render('Room/DetailRoom', { room: room });
       }
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
@@ -77,7 +77,7 @@ class Room {
         res.render('Room/roomDetail', { room: room });
       }
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
   // For Admin
@@ -106,63 +106,67 @@ class Room {
       await db.Room.create(room);
       res.redirect('/room/roomIndex');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
   static async updateRender(req, res) {
-    const id = req.params.id;
     try {
+      const id = req.params.id;
       const roomDb = await db.Room.findByPk(id);
       if (roomDb) {
         const room = roomDb.get({ plain: true });
         res.render('Room/UpdateRoom', { layout: 'admin', room: room });
       }
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
   static async update(req, res) {
-    let image_url;
-    const id = req.params.id;
-    const { name, type, floor, price, capacity, oldimage } = req.body;
-    if (req.file?.filename) {
-      image_url = req.file.filename;
-      const oldPath = path.join('views/images/', oldimage);
-      await fs.unlink(oldPath);
-    } else {
-      image_url = oldimage;
-    }
     try {
+      let image_url;
+      const id = req.params.id;
+      const { name, type, floor, price, capacity, oldimage } = req.body;
+      if (req.file?.filename) {
+        image_url = req.file.filename;
+        const oldPath = path.join('views/images/', oldimage);
+        await fs.unlink(oldPath);
+      } else {
+        image_url = oldimage;
+      }
       await db.Room.update(
         { name, type, floor, price, capacity, image_url },
         { where: { id: id } }
       );
       res.redirect('/room/roomIndex');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
   static async delete(req, res) {
-    const id = req.params.id;
-    const delete_status = true;
     try {
+      const id = req.params.id;
+      const delete_status = true;
       await db.Room.update({ delete_status }, { where: { id: id } });
       res.redirect('/room');
     } catch (err) {
-      console.log(err);
+      res.redirect('/home/err');
     }
   }
 
   static async checkExist(req, res) {
-    const { name, id } = req.body;
-    const room = await db.Room.findOne({ where: { name: name } });
-    if (room && room.id != id) {
-      res.json({ exist: true });
-    } else {
-      res.json({ exist: false });
+    try {
+      const { name, id } = req.body;
+      const room = await db.Room.findOne({ where: { name: name } });
+      if (room && room.id != id) {
+        res.json({ exist: true });
+      } else {
+        res.json({ exist: false });
+      }
+    } catch (err) {
+      res.redirect('/home/err');
     }
   }
 }
