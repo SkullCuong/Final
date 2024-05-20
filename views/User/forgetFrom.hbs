@@ -1,57 +1,60 @@
-<!--<div class='main-banner' id='top' style='padding-bottom: 60px;'>
+<div class='main-banner' id='top' style='padding-bottom: 60px;'>
   <div class='container-fluid'>
-    <form method='post'>
-      <input type='text' name='token' value='{{token}}' /><br />
-      <label>Wellcome {{user.username}}</label><br />
-      <label>Password</label><br />
-      <input type='text' name='password' /><br />
-      <label>RePassword</label><br />
-      <input type='text' name='Repassword' /><br />
-      <input type='submit' value='Submit' />
-    </form>
-    <a href='/user/logout' class='logout-btn'>Logout</a>
-  </div>
-</div>-->
-
-<form method='post'>
-  <div class='row'>
-    <div class='card'>
-      <div class='card-body'>
-        <!-- id -->
-        <h5 class='card-title mb-2'>Wellcome {{user.username}}</h5>
-        <div class='text-center mb-2'>
-          <input
-            type='text'
-            name='token'
-            class='form-control'
-            value='{{token}}'
-            placeholder='Password'
-          />
-        </div>
-        <!-- User Name -->
-        <h5 class='card-title mb-2'>Password</h5>
-        <div class='text-center mb-2'>
-          <input
-            type='text'
-            name='password'
-            class='form-control'
-            placeholder='Password'
-          />
-        </div>
-        <!-- Email -->
-        <h5 class='card-title mb-2'>RePassword</h5>
-        <div class='text-center mb-2'>
-          <input
-            type='text'
-            name='Repassword'
-            class='form-control'
-            placeholder='Repassword'
-          />
-        </div>
-        <div class='text-center'>
-          <input type='submit' value='Submit' class='btn btn-secondary' />
+    <div class='container'>
+      <div class='row justify-content-center'>
+        <div class='col-12 col-lg-6'>
+          <form id='forget' method='post'>
+            <div class='row'>
+              <div class='card'>
+                <div class='card-header' style='background-color: white;'>
+                  <h3 class='mb-0 text-center'><strong>Change Password</strong></h3>
+                </div>
+                <div class='card-body'>
+                  <h5 class='card-title mb-2'>Password</h5>
+                  <div class='text-center mb-4'>
+                    <input
+                      type='password'
+                      name='password'
+                      class='form-control'
+                      placeholder='Password'
+                    />
+                  </div>
+                  <div class='text-center mb-2'>
+                    <input
+                      type='text'
+                      name='token'
+                      class='form-control'
+                      value='{{token}}'
+                      hidden
+                    />
+                  </div>
+                  <h5 class='card-title mb-2'>RePassword</h5>
+                  <div class='text-center mb-4'>
+                    <input
+                      type='password'
+                      name='repassword'
+                      class='form-control'
+                      placeholder='RePassword'
+                    />
+                  </div>
+                  <div
+                    id='error-message'
+                    style='color: red; display: none;'
+                  >Please fill out all fields before submitting the form.</div>
+                  <div class='text-center'>
+                    <input
+                      type='submit'
+                      value='Submit'
+                      class='btn btn-secondary'
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-</form>
+</div>
+<script src='/assets/js/account/forgetPass.js'></script>

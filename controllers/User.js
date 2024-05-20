@@ -151,13 +151,14 @@ class User {
   }
 
   static async forget(req, res) {
-    const { email } = req.body;
-    const user = db.User.findOne({ where: { email: email } });
-    if (!user) {
-      return;
-    }
-    const token = User.generate_Token();
-    const htmlBody = `
+    try {
+      const { email } = req.body;
+      const user = db.User.findOne({ where: { email: email } });
+      if (!user) {
+        return;
+      }
+      const token = User.generate_Token();
+      const htmlBody = `
     <html>
     <head>
         <title>New Password</title>
@@ -168,28 +169,32 @@ class User {
         <a href="http://localhost:3000/user/change?token=${token}">Change Password</a>
     </body>
     </html>`;
-    try {
       await db.User.update(
         { forget_Token: token },
         { where: { email: email } }
       );
       await sendMail
         .sendMail('New Password', htmlBody, email)
-        .then(res.render('User/activeAccount'));
+        .then(res.redirect('User/login'));
     } catch (err) {
       res.redirect('/home/err');
     }
   }
 
   static async changePassRender(req, res) {
-    const { token } = req.query;
-    res.render('User/forgetFrom', { layout: 'profile', token: token });
+    try {
+      const { token } = req.query;
+      res.render('User/forgetFrom', { layout: 'profile', token: token });
+    } catch (err) {
+      res.redirect('/home/err');
+    }
   }
 
   static async changePass(req, res) {
-    const { password, token } = req.body;
-    const hashPassword = await User.hashPassword(password);
     try {
+      const { password, token } = req.body;
+      console.log(password, token);
+      const hashPassword = await User.hashPassword(password);
       await db.User.update(
         { password: hashPassword, forget_Token: null },
         { where: { forget_Token: token } }
