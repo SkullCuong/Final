@@ -40,9 +40,9 @@ async function createRoles() {
   await db.Role.findOrCreate({ where: { name: 'Admin' } });
   await db.Role.findOrCreate({ where: { name: 'User' } });
   await db.User.findOrCreate({
-    where: {
+    where: { email: 'Admin' },
+    defaults: {
       name: 'Admin',
-      email: 'Admin',
       password: pass,
       dob,
       sex,
