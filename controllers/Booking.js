@@ -40,6 +40,7 @@ class Booking {
         booking.id
       );
       await db.Bookingdetail.create(bookingDetail);
+      res.redirect(`/booking/order/${book.UserId}`);
     } catch (err) {
       res.redirect('/home/err');
     }
